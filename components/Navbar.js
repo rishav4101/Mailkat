@@ -1,0 +1,141 @@
+import React from "react";
+import clsx from "clsx";
+import { useTheme } from "@material-ui/core/styles";
+import Drawer from "@material-ui/core/Drawer";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import List from "@material-ui/core/List";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import GitHubIcon from "@material-ui/icons/GitHub";
+import { useNavbarStyles } from "./Styles";
+
+export default function PersistentDrawerLeft({ children }) {
+  const matches = useMediaQuery('(max-width: 920px)');
+  const classes = useNavbarStyles();
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(true);
+
+  React.useEffect(()=> {
+    if(matches && open){
+        setOpen(false);
+    }
+  }, [matches])
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar
+      elevation={0}
+        position="fixed"
+        className={clsx(classes.appBar, {
+          [classes.appBarShift]: open,
+        })}
+      >
+        <Toolbar style={{height:"80px",}}>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            className={clsx(classes.menuButton, open && classes.hide)}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            variant="h6"
+            noWrap
+            style={{ display: "flex", alignItems: "center" }}
+          >
+            <img
+              alt="."
+              src="/logo2.png"
+              style={{ height: "55px", width: "auto" }}
+            />
+            {/* &nbsp;MailKat */}
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        className={clsx(classes.drawer)}
+        variant="persistent"
+        anchor="left"
+        open={open}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <div className={classes.drawerHeader}>
+        <ListItemText><b>Page Title</b></ListItemText>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === "ltr" ? (
+              <ChevronLeftIcon style={{ color: "#dd2c00" }} />
+            ) : (
+              <ChevronRightIcon />
+            )}
+          </IconButton>
+        </div>
+        <List>
+          
+            <ListItem>
+              <ListItemText>Home</ListItemText>
+            </ListItem>
+          
+          
+            <ListItem>
+              <ListItemText>Explorer</ListItemText>
+            </ListItem>
+          
+        </List>
+        
+        <div
+          style={{ height: "100%", display: "flex", alignItems: "flex-end" }}
+        >
+          <div
+            style={{
+              width: "100%",
+              height: "70px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              fontWeight: 500,
+              fontSize: 17,
+              borderTop: "1px solid #44a",
+            }}
+          >
+            By Team Weblikate &nbsp;&nbsp;
+            <a
+              style={{ textDecoration: "none" }}
+              href="https://github.com/rishav4101/eth-supplychain-dapp"
+            >
+              <GitHubIcon style={{ color: "#fff" }} />
+            </a>
+          </div>
+        </div>
+      </Drawer>
+      <main
+        className={clsx(classes.content, {
+          [classes.contentShift]: open,
+        })}
+      >
+        <div className={classes.drawerHeader} />
+        <div style={{ margin: "0 auto", maxWidth: 1300 }}>{children}</div>
+      </main>
+    </div>
+  );
+}

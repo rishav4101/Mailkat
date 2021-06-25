@@ -3,7 +3,9 @@ import React from "react";
 import App from "next/app";
 import { wrapper } from "../redux/store";
 import { PersistGate } from "redux-persist/integration/react";
-import {ReactReduxContext} from 'react-redux'
+import {ReactReduxContext} from 'react-redux';
+import { ThemeProvider } from "@material-ui/core/styles";
+import theme from "../components/Theme";
 
 class MyApp extends App {
   constructor(props) {
@@ -29,7 +31,9 @@ class MyApp extends App {
       <ReactReduxContext.Consumer>
       {({ store }) => (
           <PersistGate persistor={store.__PERSISTOR} loading={<div>Loading</div>}>
+            <ThemeProvider theme={theme}>
               <Component {...pageProps} />
+              </ThemeProvider>
           </PersistGate>
       )}
     </ReactReduxContext.Consumer>
