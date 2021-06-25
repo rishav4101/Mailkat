@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "../components/Layout";
 import Button from "@material-ui/core/Button";
 
-export default function History() {
+export default function Login() {
   return (
     <div>
       <main>
@@ -71,7 +71,9 @@ export default function History() {
               </div>
             </div>
             <div className="hidden lg:flex items-center justify-center bg-indigo-100 flex-1 h-screen">
-              <div className="max-w-xs transform duration-200 hover:scale-110 cursor-pointer"></div>
+              <div className="max-w-xs transform duration-200 hover:scale-110 cursor-pointer">
+                <img src="./Login.svg" alt="." />
+              </div>
             </div>
           </div>
         </Layout>

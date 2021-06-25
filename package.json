@@ -11,10 +11,13 @@
   "dependencies": {
     "@material-ui/core": "^4.11.4",
     "@material-ui/icons": "^4.11.2",
+    "draft-js": "^0.11.7",
+    "draftjs-to-html": "^0.9.1",
     "next": "11.0.1",
     "next-redux-wrapper": "^7.0.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-draft-wysiwyg": "^1.14.7",
     "react-redux": "^7.2.4",
     "react-transition-group": "^4.4.2",
     "redux-persist": "^6.0.0",
