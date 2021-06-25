@@ -15,7 +15,10 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import GitHubIcon from "@material-ui/icons/GitHub";
+import HomeIcon from '@material-ui/icons/Home';
+import HistoryIcon from '@material-ui/icons/History';
 import { useNavbarStyles } from "./Styles";
+import Link from "next/link";
 
 export default function PersistentDrawerLeft({ children }) {
   const matches = useMediaQuery('(max-width: 920px)');
@@ -81,7 +84,7 @@ export default function PersistentDrawerLeft({ children }) {
         }}
       >
         <div className={classes.drawerHeader}>
-        <ListItemText><b>Page Title</b></ListItemText>
+        <ListItemText><b className="uppercase text-xl ml-5 text-primary">Page Title</b></ListItemText>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon style={{ color: "#dd2c00" }} />
@@ -90,16 +93,22 @@ export default function PersistentDrawerLeft({ children }) {
             )}
           </IconButton>
         </div>
+        {/* <div className="bg-fadedOrange h-px"/> */}
         <List>
           
-            <ListItem>
-              <ListItemText>Home</ListItemText>
+          <Link href="/">
+            <ListItem className="hover:text-secondary hover:bg-fadedOrange cursor-pointer">
+            <HomeIcon className="m-2.5"/>
+              <ListItemText >Home</ListItemText>
             </ListItem>
+            </Link>
           
-          
-            <ListItem>
-              <ListItemText>Explorer</ListItemText>
+            <Link href="/history">
+            <ListItem className="hover:text-secondary hover:bg-fadedOrange cursor-pointer">
+            <HistoryIcon className="m-2.5"/>
+              <ListItemText >History</ListItemText>
             </ListItem>
+            </Link>
           
         </List>
         
@@ -115,7 +124,6 @@ export default function PersistentDrawerLeft({ children }) {
               alignItems: "center",
               fontWeight: 500,
               fontSize: 17,
-              borderTop: "1px solid #44a",
             }}
           >
             By Team Weblikate &nbsp;&nbsp;

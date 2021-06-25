@@ -11,8 +11,9 @@ export const useTableStyles = makeStyles({
   TableRoot2: {
     width: "100%",
     maxWidth: 1300,
+    minWidth:300,
     margin: "30px auto",
-    border: "2px solid #ff3d00",
+    border: "0px solid #ff3d00",
     borderRadius: 10,
     boxShadow: "0px 0px 20px #ffccbc",
   },
@@ -74,6 +75,7 @@ export const useNavbarStyles = makeStyles((theme) => ({
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
+    minHeight:"80px !important"
   },
   content: {
     flexGrow: 1,
