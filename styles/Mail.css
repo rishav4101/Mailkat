@@ -1,0 +1,39 @@
+.sun-editor {
+    margin: 30px auto !important;
+    border: 0px solid #ff3d00 !important;
+    border-radius: 10px !important;
+    box-shadow: 0px 0px 20px #ffccbc !important;
+    
+}
+.sun-editor .se-btn-module-border{
+    border: none !important;
+}
+.se-container{
+    border-radius: 10px !important;
+}
+.se-toolbar, .se-btn-tray, .se-menu-tray{
+    outline: none !important;
+    background-color: #ffccbc;
+    border-top-right-radius: 10px !important;
+    border-top-left-radius: 10px !important;
+}
+.se-more-form, .se-btn {
+    outline: none !important;
+    background-color: #ffccbc;
+}
+.se-wrapper-inner{
+    height: 400px !important;
+    overflow-y: scroll !important;
+}
+.se-resizing-bar{
+    
+    background-color: #ffccbc  !important;
+    border-bottom-right-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+}
+.se-char-counter-wrapper{
+    color:#111 !important;
+}
+.se-navigation{
+    color:#111 !important;
+}

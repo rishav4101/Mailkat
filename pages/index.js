@@ -44,6 +44,7 @@ export default function Home() {
         <meta name="description" content="Mailkat official website" />
         <meta charset="utf-8" />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.49.0/lib/codemirror.min.css"></link>
       </Head>
 
       <main>
