@@ -69,7 +69,7 @@ export default function PersistentDrawerLeft({ children }) {
             <img
               alt="."
               src="/logo2.png"
-              style={{ height: "55px", width: "auto" }}
+              style={{ height: "55px", width: "auto", cursor:"pointer" }}
             />
             {/* &nbsp;MailKat */}
           </Typography>
