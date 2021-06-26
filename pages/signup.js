@@ -136,7 +136,7 @@ export default function signup() {
                   <img
                     style={{
                       objectFit: "contain",
-                      maxWidth: "100%",
+                      maxWidth: "130%",
                       height: "auto",
                     }}
                     src="./signup.svg"
