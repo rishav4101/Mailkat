@@ -2,6 +2,7 @@ import React from "react";
 import Layout from "../components/Layout";
 import Button from "@material-ui/core/Button";
 import dynamic from "next/dynamic";
+import TextField from '@material-ui/core/TextField';
 
 import "suneditor/dist/css/suneditor.min.css"; // Import Sun Editor's CSS File
 const SunEditor = dynamic(() => import("suneditor-react"), {
@@ -28,8 +29,17 @@ export default function Mail() {
     <div>
     <main>
     <Layout>
-      <div className="flex flex-col justify-center">
-      <Button onClick={() => console.log(value)}>SEND</Button>
+      <div className="flex flex-col justify-center rounded-xl p-7" style={{boxShadow:"0px 0px 20px #ffccbc"}}>
+        <h1 className="text-3xl lg:text-5xl my-5">Create a new mail</h1>
+        <div className="flex flex-row flex-wrap">
+          
+          <div className="w-full sm:w-1/3 p-2">
+          <TextField className="w-full" id="outlined-basic" label="Recipient" variant="outlined"/>
+          </div>
+          <div className="w-full sm:w-2/3 p-2">
+          <TextField className="w-full" id="outlined-basic" label="Subject" variant="outlined"/>
+          </div>
+        </div>
       <SunEditor
         getSunEditorInstance={getSunEditorInstance}
         onChange={handleChange}
@@ -169,8 +179,13 @@ export default function Mail() {
           width:"100%"
         }}
       />
+      <div className="flex flex-row">
+      <Button variant="contained" size="large" color="primary" onClick={() => console.log(value)}>SEND</Button>
+      
+      </div>
       </div>
     </Layout>
+    
     </main>
     </div>
   );

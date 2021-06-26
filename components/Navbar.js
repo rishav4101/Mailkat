@@ -17,6 +17,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import GitHubIcon from "@material-ui/icons/GitHub";
 import HomeIcon from '@material-ui/icons/Home';
 import HistoryIcon from '@material-ui/icons/History';
+import EditIcon from '@material-ui/icons/Edit';
 import { useNavbarStyles } from "./Styles";
 import Link from "next/link";
 
@@ -107,6 +108,13 @@ export default function PersistentDrawerLeft({ children }) {
             <ListItem className="hover:text-secondary hover:bg-fadedOrange cursor-pointer">
             <HistoryIcon className="m-2.5"/>
               <ListItemText >History</ListItemText>
+            </ListItem>
+            </Link>
+
+            <Link href="/mail">
+            <ListItem className="hover:text-secondary hover:bg-fadedOrange cursor-pointer">
+            <EditIcon className="m-2.5"/>
+              <ListItemText >Mail</ListItemText>
             </ListItem>
             </Link>
           
