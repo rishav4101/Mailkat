@@ -8,7 +8,7 @@ export default function MultiEmail(props) {
     <ReactMultiEmail
       placeholder={props.placeholder}
       emails={props.email}
-      onChange={() => props.handler(props.email)}
+      onChange={props.handler}
       validateEmail={(email) => {
         return isEmail(email); // return boolean
       }}

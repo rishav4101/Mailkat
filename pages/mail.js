@@ -31,19 +31,36 @@ export default function Mail() {
   // The sunEditor parameter will be set to the core suneditor instance when this function is called
   const getSunEditorInstance = (sunEditor) => {
     editor.current = sunEditor;
-    console.log(editor.current);
   };
+
+  //EMAIL BODY
+  const [emailHtml, setEmailHtml] = React.useState("");
   const handleChange = (content) => {
+    setEmailHtml(content);
     console.log(content); //Get Content Inside Editor
   };
 
-  const [value, setValue] = React.useState("");
-
   //EMAILS
   const [toEmails, setToEmails] = React.useState([]);
+  const changeToEmails = (emails) =>{
+    setToEmails(emails);
+  }
   const [ccEmails, setCcEmails] = React.useState([]);
+  const changeCcEmails = (emails) =>{
+    setCcEmails(emails);
+  }
   const [bccEmails, setBccEmails] = React.useState([]);
+  const changeBccEmails = (emails) =>{
+    setBccEmails(emails);
+  }
 
+  //SUBJECT
+  const [subject, setSubject] = React.useState("");
+  const handleSubjectChange = (event) =>{
+    setSubject(event.target.value)
+  }
+
+  //SCHEDULE HANDLERS
   const [schedule, setSchedule] = React.useState("");
   const handleScheduleChange = (event) => {
     setSchedule(event.target.value);
@@ -107,6 +124,32 @@ export default function Mail() {
     999
   );
 
+  //ALL FORM DATA HANDLER
+  const [data, setData] = React.useState({});
+
+  //ONSEND HANDLER
+  const onSend = () => {
+    setData({
+      toEmails: toEmails,
+      ccEmails: ccEmails,
+      bccEmails: bccEmails,
+      subject: subject,
+      emailHtml: emailHtml,
+      schedule: schedule,
+      timely: timely,
+      onceDate: onceDate,
+      dailyDate: dailyDate,
+      weeklyDay: weeklyDay,
+      weeklyTime: weeklyTime,
+      monthlyDay: monthlyDay,
+      monthlyTime: monthlyTime,
+      yearlyDate: yearlyDate,
+    });
+
+    console.log(data);
+  };
+
+  //RENDER
   return (
     <div>
       <main>
@@ -120,21 +163,21 @@ export default function Mail() {
               <div className="w-full p-2">
                 <MultiEmail
                   email={toEmails}
-                  handler={setToEmails}
+                  handler={changeToEmails}
                   placeholder="To"
                 />
               </div>
               <div className="w-full p-2">
                 <MultiEmail
                   email={ccEmails}
-                  handler={setCcEmails}
+                  handler={changeCcEmails}
                   placeholder="Cc"
                 />
               </div>
               <div className="w-full p-2">
                 <MultiEmail
                   email={bccEmails}
-                  handler={setBccEmails}
+                  handler={changeBccEmails}
                   placeholder="Bcc"
                 />
               </div>
@@ -144,6 +187,8 @@ export default function Mail() {
                   id="outlined-basic"
                   label="Subject"
                   variant="outlined"
+                  value={subject}
+                  onChange={handleSubjectChange}
                 />
               </div>
             </div>
@@ -473,7 +518,7 @@ export default function Mail() {
                 variant="contained"
                 size="large"
                 color="primary"
-                onClick={() => console.log(value)}
+                onClick={onSend}
               >
                 SEND
               </Button>
