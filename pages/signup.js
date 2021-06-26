@@ -15,7 +15,7 @@ export default function Login() {
                   className="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-left xl:text-5xl
                   xl:text-bold" style={{fontSize:"4rem",color:"red", fontWeight:"bold"}}
                 >
-                  Log in
+                 Sign Up
                 </h2>
                 <div className="mt-12">
                   <form>
@@ -50,15 +50,15 @@ export default function Login() {
                           color="primary"
                           className="m-10"
                         >
-                          Log In
+                         Sign Up
                         </Button>
                       </div>
                     </div>
                   </form>
                   <div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
-                    Don't have an account ?{" "}
+                   Already have an account ?{" "}
                     <a className="cursor-pointer text-indigo-600 hover:text-indigo-800" style={{color:"red",fontWeight:"bold"}}>
-                      Sign up
+                     Log In
                     </a>
                   </div>
                 </div>
@@ -66,7 +66,7 @@ export default function Login() {
             </div>
             <div className="hidden lg:flex items-center justify-center bg-indigo-100 flex-1 h-screen" style={{height:"auto"}}>
               <div className="max-w-xs transform duration-200 hover:scale-110 cursor-pointer">
-                <img style={{objectFit:"contain",maxWidth:"100%", height:"auto"}} src="./Login.svg" alt="." />
+                <img style={{objectFit:"contain",maxWidth:"100%", height:"auto"}} src="./signup.svg" alt="." />
               </div>
             </div>
           </div>
