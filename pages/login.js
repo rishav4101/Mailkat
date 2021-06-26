@@ -1,8 +1,26 @@
 import React from "react";
 import Layout from "../components/Layout";
 import Button from "@material-ui/core/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { ACTION_TYPES } from "../redux/actions/authAction";
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const fetchedLogIn = useSelector((state) => state.auth.logInMsg);
+  const [data, setData] = React.useState({
+    username: "",
+    password: ""
+  })
+
+  const sign = () => {
+    dispatch({type: ACTION_TYPES.LOG_IN, payload: data})
+    console.log(fetchedLogIn);
+}
+
+React.useEffect(() => {
+  console.log(fetchedLogIn);
+});
+
   return (
     <div>
       <main>
@@ -32,12 +50,17 @@ export default function Login() {
                     <form>
                       <div>
                         <div className="text-sm font-bold text-gray-700 tracking-wide">
-                          Email Address
+                          Email Address or Username
                         </div>
                         <input
                           className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                           type=""
-                          placeholder="Enter your email address"
+                          placeholder="Enter email or username"
+                          value={data.username}
+                          onChange={(e) => {
+                            setData({...data, username:e.target.value})
+                            console.log(data)
+                          }}
                         ></input>{" "}
                       </div>
                       <div className="mt-8">
@@ -50,6 +73,11 @@ export default function Login() {
                           className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                           type=""
                           placeholder="Enter your password"
+                          value={data.password}
+                          onChange={(e) => {
+                            setData({...data, password:e.target.value})
+                            console.log(data)
+                          }}
                         ></input>{" "}
                       </div>
                       <div className="mt-10">
@@ -59,6 +87,7 @@ export default function Login() {
                             size="large"
                             color="primary"
                             className="m-10"
+                            onClick={sign}
                           >
                             Log In
                           </Button>

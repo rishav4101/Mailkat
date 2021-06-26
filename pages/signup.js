@@ -1,8 +1,31 @@
 import React from "react";
 import Layout from "../components/Layout";
 import Button from "@material-ui/core/Button";
+import { useDispatch, useSelector } from "react-redux";
+import { ACTION_TYPES } from "../redux/actions/authAction";
 
-export default function Login() {
+export default function signup() {
+  const dispatch = useDispatch();
+  const fetchedSignUp = useSelector((state) => state.auth.signUpMsg);
+  const fetchedLogIn = useSelector((state) => state.auth.logInMsg);
+
+  const [data, setData] = React.useState({
+    email: "",
+    username: "",
+    password: ""
+  })
+
+  const sign = () => {
+      dispatch({type: ACTION_TYPES.SIGN_UP, payload: data})
+      console.log(fetchedSignUp);
+      // dispatch({type: ACTION_TYPES.LOG_IN, payload: JSON.stringify({"username": data.email, "password": data.password})})
+      // console.log(fetchedLogIn);
+  }
+
+  React.useEffect(() => {
+    console.log(fetchedSignUp);
+  });
+
   return (
     <div>
       <main>
@@ -38,6 +61,28 @@ export default function Login() {
                           className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                           type=""
                           placeholder="Enter your email address"
+                          value={data.email}
+                          onChange={(e) => {
+                            setData({...data, email:e.target.value})
+                            console.log(data)
+                          }}
+                        ></input>{" "}
+                      </div>
+                      <div className="mt-8">
+                        <div className="flex justify-between items-center">
+                          <div className="text-sm font-bold text-gray-700 tracking-wide">
+                            Username
+                          </div>
+                        </div>
+                        <input
+                          className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+                          type=""
+                          placeholder="Enter your username"
+                          value={data.username}
+                          onChange={(e) => {
+                            setData({...data, username:e.target.value})
+                            console.log(data)
+                          }}
                         ></input>{" "}
                       </div>
                       <div className="mt-8">
@@ -50,6 +95,11 @@ export default function Login() {
                           className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                           type=""
                           placeholder="Enter your password"
+                          value={data.password}
+                          onChange={(e) => {
+                            setData({...data, password:e.target.value})
+                            console.log(data)
+                          }}
                         ></input>{" "}
                       </div>
                       <div className="mt-10">
@@ -59,6 +109,7 @@ export default function Login() {
                             size="large"
                             color="primary"
                             className="m-10"
+                            onClick={sign}
                           >
                             Sign Up
                           </Button>

@@ -4,10 +4,11 @@ import { combineReducers } from "redux";
 
 /* IMPORT ALL REDUCERS HERE */
 import countries from "./countries"
+import auth from "./auth"
 
 /* COMBINE REDUCERS */
 const combinedReducers = combineReducers({
-    countries
+    countries, auth
 })  
 
 export default function reducer(state, action) {
@@ -18,7 +19,8 @@ export default function reducer(state, action) {
             ...state,
             ...action.payload,
             }
-            if (state.countries) nextState.countries = state.countries // Preserve state during client side navigations
+            // if (state.countries) nextState.countries = state.countries
+            if (state.auth) nextState.auth = state.auth // Preserve state during client side navigations
             return nextState;
             
         default: 

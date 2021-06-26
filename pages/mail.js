@@ -11,7 +11,6 @@ import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
-  KeyboardDatePicker,
   KeyboardDateTimePicker,
 } from "@material-ui/pickers";
 
