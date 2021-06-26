@@ -14,6 +14,9 @@ import {
   KeyboardDateTimePicker,
 } from "@material-ui/pickers";
 
+import { useDispatch, useSelector } from "react-redux";
+import { ACTION_TYPES as ac1 } from "../redux/actions/campaignAction";
+
 import "suneditor/dist/css/suneditor.min.css"; // Import Sun Editor's CSS File
 import MultiEmail from "../components/MultiEmail";
 
@@ -25,6 +28,14 @@ const plugins = dynamic(() => import("suneditor/src/plugins"), {
 });
 
 export default function Mail() {
+  const dispatch = useDispatch();
+  const fetchedCampaignNames = useSelector((state) => state.campaign.campaignNames);
+
+  React.useEffect(() => {
+    dispatch({ type:ac1.GET_CAMPAIGN_NAMES });
+    console.log(fetchedCampaignNames);
+  }, [])
+
   const editor = React.useRef();
 
   // The sunEditor parameter will be set to the core suneditor instance when this function is called
@@ -37,6 +48,12 @@ export default function Mail() {
   const handleChange = (content) => {
     setEmailHtml(content);
     console.log(content); //Get Content Inside Editor
+  };
+
+  //CAMPAIGN NAME HANDLER
+  const [camName, setCamName] = React.useState("");
+  const handleCamNameChange = (event) => {
+    setCamName(event.target.value);
   };
 
   //EMAILS
@@ -128,22 +145,62 @@ export default function Mail() {
 
   //ONSEND HANDLER
   const onSend = () => {
+
+    campaignName, subject, body, second='*', minute='*', hour='*', dayOfMonth='*', month='*', dayOfWeek='*', recurrence=null
+
     setData({
-      toEmails: toEmails,
-      ccEmails: ccEmails,
-      bccEmails: bccEmails,
+      // campaignName:camName,
+      // to: toEmails,
+      // cc: ccEmails,
+      // bcc: bccEmails,
       subject: subject,
-      emailHtml: emailHtml,
-      schedule: schedule,
-      timely: timely,
-      onceDate: onceDate,
-      dailyDate: dailyDate,
-      weeklyDay: weeklyDay,
-      weeklyTime: weeklyTime,
-      monthlyDay: monthlyDay,
-      monthlyTime: monthlyTime,
-      yearlyDate: yearlyDate,
+      body: emailHtml,
+      recurrence: schedule,
+      // timely: timely,
+      // onceDate: onceDate,
+      // dailyDate: dailyDate,
+      // weeklyDay: weeklyDay,
+      // weeklyTime: weeklyTime,
+      // monthlyDay: monthlyDay,
+      // monthlyTime: monthlyTime,
+      // yearlyDate: yearlyDate,
     });
+
+    if(camName === ""){
+      setData({...data, 
+      to: toEmails,
+      cc: ccEmails,
+      bcc: bccEmails
+    })
+    } else {
+      setData({...data, 
+        campaignName: camName
+      })
+    }
+
+    if(data.recurrence === ""){
+      setData({...data, recurrence:null})
+    }
+    else {
+      if(data.recurrence === "Once"){
+        setData({...data, second:onceDate.getSeconds(), hour:onceDate.getHours(), minute:onceDate.getMinutes(), dayOfMonth:onceDate.getDate(), month:onceDate.getMonth()  })
+      }
+      else if(data.recurrence === "Timely"){
+        setData({...data, second:timely.getSeconds() })
+      }
+      else if(data.recurrence === "Daily"){
+        setData({...data, second:dailyDate.getSeconds(), hour:dailyDate.getHours(), minute:dailyDate.getMinutes() })
+      }
+      else if(data.recurrence === "Weekly"){
+        setData({...data, second:weeklyTime.getSeconds(), hour:weeklyTime.getHours(), minute:weeklyTime.getMinutes(), dayOfWeek:weeklyDay  })
+      }
+      else if(data.recurrence === "Monthly"){
+        setData({...data, second:monthlyTime.getSeconds(), hour:monthlyTime.getHours(), minute:monthlyTime.getMinutes(), dayOfMonth:monthlyDay  })
+      }
+      else if(data.recurrence === "Yearly"){
+        setData({...data, second:yearlyDate.getSeconds(), hour:yearlyDate.getHours(), minute:yearlyDate.getMinutes(), dayOfMonth:yearlyDate.getDate(), month:yearlyDate.getMonth()  })
+      }
+    }
 
     console.log(data);
   };
@@ -159,6 +216,25 @@ export default function Mail() {
           >
             <h1 className="text-3xl lg:text-5xl my-5">Create a new mail</h1>
             <div className="flex flex-row flex-wrap">
+            <div className="w-52 m-3">
+                <FormControl variant="outlined" className="w-full">
+                  <InputLabel id="demo-simple-select-filled-label">
+                    Select Campaign
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-filled-label"
+                    id="demo-simple-select-filled"
+                    value={camName}
+                    onChange={handleCamNameChange}
+                  >
+                    <MenuItem value="">
+                      <em>None</em>
+                    </MenuItem>
+                    <MenuItem value={"Once"}>Once</MenuItem>
+                    <MenuItem value={"Timely"}>Timely</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
               <div className="w-full p-2">
                 <MultiEmail
                   email={toEmails}

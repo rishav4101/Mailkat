@@ -18,6 +18,8 @@ import GitHubIcon from "@material-ui/icons/GitHub";
 import HomeIcon from '@material-ui/icons/Home';
 import HistoryIcon from '@material-ui/icons/History';
 import EditIcon from '@material-ui/icons/Edit';
+import AddIcon from '@material-ui/icons/Add';
+import ClearAllIcon from '@material-ui/icons/ClearAll';
 import { useNavbarStyles } from "./Styles";
 import Link from "next/link";
 
@@ -115,6 +117,20 @@ export default function PersistentDrawerLeft({ children }) {
             <ListItem className="hover:text-secondary hover:bg-fadedOrange cursor-pointer">
             <EditIcon className="m-2.5"/>
               <ListItemText >Mail</ListItemText>
+            </ListItem>
+            </Link>
+
+            <Link href="/createcampaign">
+            <ListItem className="hover:text-secondary hover:bg-fadedOrange cursor-pointer">
+            <AddIcon className="m-2.5"/>
+              <ListItemText >New Campaign</ListItemText>
+            </ListItem>
+            </Link>
+
+            <Link href="/allcampaign">
+            <ListItem className="hover:text-secondary hover:bg-fadedOrange cursor-pointer">
+            <ClearAllIcon className="m-2.5"/>
+              <ListItemText >All Campaign</ListItemText>
             </ListItem>
             </Link>
           

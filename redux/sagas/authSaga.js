@@ -24,9 +24,9 @@ function* logIn(action) {
    },
    body: JSON.stringify(action.payload),
 });
-   const resp = respData.json();
+   const resp = yield respData.json();
    console.log(resp);
-   yield put(logInAction(resp)); 
+   yield put(logInAction(resp.message)); 
 }
 
 export default function* watchAuth() {

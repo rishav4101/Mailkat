@@ -8,14 +8,27 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { useTableStyles } from "../components/Styles";
+import { useDispatch, useSelector } from "react-redux";
+import { ACTION_TYPES } from "../redux/actions/campaignAction";
 
 export default function Allcampaign() {
+  const dispatch = useDispatch();
+  const getCampaign = useSelector((state) => state.campaign.campaigns);
+
+  React.useEffect(() => {
+    dispatch({
+      type: ACTION_TYPES.GET_CAMPAIGN,
+    });
+    console.log(getCampaign);
+  });
+
   const classes = useTableStyles();
   const columns = [
     // { id: "id", label: "Universal ID", minWidth: 170 },
     { id: "mname", label: "Campaign Name", minWidth: 170 },
     { id: "mdate", label: "Emails", minWidth: 170 },
   ];
+
   return (
     <Layout>
       <Paper className={classes.TableRoot2}>
@@ -37,22 +50,29 @@ export default function Allcampaign() {
               </TableRow>
             </TableHead>
             <TableBody>
-              <TableRow hover role="checkbox" tabIndex={-1}>
-                <TableCell
+              {getCampaign ? 
+                (getCampaign?.map((cam) => (
+                  <>
+                  <TableRow hover role="checkbox" tabIndex={-1}>
+                  <TableCell
                   className={classes.TableCell}
                   style={{ width: "50%", fontWeight: "bold" }}
                   align="center"
                 >
-                  first
+                  {cam.campaignName}
                 </TableCell>
                 <TableCell
                   className={classes.TableCell}
                   style={{ width: "50%", fontWeight: "bold" }}
                   align="center"
                 >
-                  first
+                  {cam.to.map((em) => (em + " "))}
                 </TableCell>
-              </TableRow>
+                </TableRow>
+                </>
+                ))) : <></>}
+                
+             
             </TableBody>
           </Table>
         </TableContainer>

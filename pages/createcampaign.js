@@ -3,14 +3,28 @@ import Layout from "../components/Layout";
 import Button from "@material-ui/core/Button";
 import MultiEmail from "../components/MultiEmail";
 import TextField from "@material-ui/core/TextField";
+import { useDispatch, useSelector } from "react-redux";
+import { ACTION_TYPES } from "../redux/actions/campaignAction";
 
 export default function Createcampaign() {
+  const dispatch = useDispatch();
+  const createdCampaign = useSelector((state) => state.campaign.createCampaignMsg);
+
   // const [toEmails, setToEmails] = React.useState([]);
   //EMAILS
   const [toEmails, setToEmails] = React.useState([]);
   const changeToEmails = (emails) => {
     setToEmails(emails);
   };
+  const [ccEmails, setCcEmails] = React.useState([]);
+  const changeCcEmails = (emails) => {
+    setCcEmails(emails);
+  }
+  const [bccEmails, setBccEmails] = React.useState([]);
+  const changeBccEmails = (emails) => {
+    setBccEmails(emails);
+  }
+
   //Campaign
   const [campaign, setCampaign] = React.useState("");
   const handleCampaignChange = (event) => {
@@ -23,12 +37,24 @@ export default function Createcampaign() {
   //ONSEND HANDLER
   const onSend = () => {
     setData({
-      toEmails: toEmails,
-      campaign: campaign,
+      to: toEmails,
+      cc: ccEmails,
+      bcc: bccEmails,
+      campaignName: campaign
     });
 
     console.log(data);
+    dispatch({type:ACTION_TYPES.CREATE_CAMPAIGN, payload: data});
+    console.log(createdCampaign);
+
+    // setData({});
+    // setToEmails([]);
+    // setCcEmails([]);
+    // setBccEmails([]);
+    // setCampaign("");
   };
+
+
   return (
     <div>
       <main>
@@ -94,6 +120,18 @@ xl:text-bold"
                         <MultiEmail
                           email={toEmails}
                           handler={changeToEmails}
+                          placeholder="To"
+                        />
+                        <br/>
+                        <MultiEmail
+                          email={ccEmails}
+                          handler={changeCcEmails}
+                          placeholder="To"
+                        />
+                        <br/>
+                        <MultiEmail
+                          email={bccEmails}
+                          handler={changeBccEmails}
                           placeholder="To"
                         />
                       </div>
