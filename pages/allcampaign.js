@@ -17,10 +17,10 @@ export default function Allcampaign() {
 
   React.useEffect(() => {
     dispatch({
-      type: ACTION_TYPES.GET_CAMPAIGN,
+      type: ACTION_TYPES.GET_CAMPAIGN
     });
     console.log(getCampaign);
-  });
+  }, []);
 
   const classes = useTableStyles();
   const columns = [
@@ -50,7 +50,7 @@ export default function Allcampaign() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {getCampaign ? 
+               {getCampaign ? 
                 (getCampaign?.map((cam) => (
                   <>
                   <TableRow hover role="checkbox" tabIndex={-1}>
@@ -70,7 +70,7 @@ export default function Allcampaign() {
                 </TableCell>
                 </TableRow>
                 </>
-                ))) : <></>}
+                ))) : <></>} 
                 
              
             </TableBody>

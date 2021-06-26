@@ -1,8 +1,8 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { useDispatch, useSelector } from "react-redux";
+import { ACTION_TYPES  } from "../redux/actions/mailAction";
 import React from "react";
-import { ACTION_TYPES } from "../redux/actions/countriesAction";
 import Layout from "../components/Layout";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
@@ -15,7 +15,14 @@ import TableRow from "@material-ui/core/TableRow";
 import { useTableStyles } from "../components/Styles";
 
 export default function Home() {
+  const dispatch = useDispatch();
+  const fetchedSchedule = useSelector((state) => state.mail.schedule);
   const classes = useTableStyles();
+
+  React.useEffect(() => {
+    dispatch({type:ACTION_TYPES.GET_SCHEDULE})
+    console.log(fetchedSchedule)
+  }, []);
 
   const columns = [
     { id: "id", label: "Universal ID", minWidth: 170 },
@@ -26,17 +33,6 @@ export default function Home() {
     { id: "owner", label: "Owner", minWidth: 170 },
     { id: "lastAction", label: "Last Action", minWidth: 170 },
   ];
-
-  // const dispatch = useDispatch();
-  // const fetchedCountries = useSelector((state) => state.countries.countriesList);
-
-  // React.useEffect(() => {
-  //   dispatch({
-  //     type: ACTION_TYPES.FETCH_COUNTRIES,
-  //   });
-  //   console.log(fetchedCountries);
-  // }, []);
-
   return (
     <div className={styles.container}>
       <Head>

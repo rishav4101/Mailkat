@@ -32,26 +32,25 @@ export default function Createcampaign() {
   };
 
   //ALL FORM DATA HANDLER
-  const [data, setData] = React.useState({});
+  
 
   //ONSEND HANDLER
-  const onSend = () => {
-    setData({
+  const onsend = async () => {
+    const data = {
       to: toEmails,
       cc: ccEmails,
       bcc: bccEmails,
       campaignName: campaign
-    });
+    };
 
     console.log(data);
     dispatch({type:ACTION_TYPES.CREATE_CAMPAIGN, payload: data});
     console.log(createdCampaign);
 
-    // setData({});
-    // setToEmails([]);
-    // setCcEmails([]);
-    // setBccEmails([]);
-    // setCampaign("");
+    setToEmails([]);
+    setCcEmails([]);
+    setBccEmails([]);
+    setCampaign("");
   };
 
 
@@ -142,7 +141,7 @@ xl:text-bold"
                             size="large"
                             color="primary"
                             className="m-10"
-                            onClick={onSend}
+                            onClick={onsend}
                           >
                             Create
                           </Button>

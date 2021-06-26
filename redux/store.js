@@ -26,6 +26,12 @@ export const makeStore = (initialState = exampleInitialState) => {
       applyMiddleware(sagaMiddleware)
     );
     store.sagaTask = sagaMiddleware.run(rootSaga);
+    store.sagaTask.toPromise().catch(error => {
+      // Error here is a fatal error.
+      // None of the sagas down the road caught it.
+      console.log(error);
+      throw error;
+    });
     store.__PERSISTOR = persistStore(store);
   } else {
     store = createStore(
@@ -34,6 +40,13 @@ export const makeStore = (initialState = exampleInitialState) => {
       applyMiddleware(sagaMiddleware)
     );
     store.sagaTask = sagaMiddleware.run(rootSaga);
+    store.sagaTask.toPromise().catch(error => {
+      // Error here is a fatal error.
+      // None of the sagas down the road caught it.
+      
+      console.log(error);
+      throw error;
+    });
   }
 
   return store;

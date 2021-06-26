@@ -20,10 +20,16 @@ import HistoryIcon from '@material-ui/icons/History';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
 import ClearAllIcon from '@material-ui/icons/ClearAll';
+import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { useNavbarStyles } from "./Styles";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
+import { ACTION_TYPES } from "../redux/actions/authAction";
 
 export default function PersistentDrawerLeft({ children }) {
+  const dispatch = useDispatch();
+  const fetchedToken = useSelector((state) => state.auth.token);
   const matches = useMediaQuery('(max-width: 920px)');
   const classes = useNavbarStyles();
   const theme = useTheme();
@@ -99,13 +105,30 @@ export default function PersistentDrawerLeft({ children }) {
         {/* <div className="bg-fadedOrange h-px"/> */}
         <List>
           
-          <Link href="/">
+            <Link href="/">
             <ListItem className="hover:text-secondary hover:bg-fadedOrange cursor-pointer">
             <HomeIcon className="m-2.5"/>
               <ListItemText >Home</ListItemText>
             </ListItem>
             </Link>
-          
+
+          {fetchedToken === "" ? 
+          <>
+          <Link href="/login">
+          <ListItem className="hover:text-secondary hover:bg-fadedOrange cursor-pointer">
+            <PowerSettingsNewIcon className="m-2.5"/>
+              <ListItemText >Login</ListItemText>
+            </ListItem>
+            </Link>
+
+            <Link href="/signup">
+          <ListItem className="hover:text-secondary hover:bg-fadedOrange cursor-pointer">
+            <AccountCircleIcon className="m-2.5"/>
+              <ListItemText >Signup</ListItemText>
+            </ListItem>
+            </Link>
+          </> :
+          <>
             <Link href="/history">
             <ListItem className="hover:text-secondary hover:bg-fadedOrange cursor-pointer">
             <HistoryIcon className="m-2.5"/>
@@ -133,7 +156,17 @@ export default function PersistentDrawerLeft({ children }) {
               <ListItemText >All Campaign</ListItemText>
             </ListItem>
             </Link>
-          
+
+            
+            <ListItem onClick={() => {
+              console.log("logout init");
+              dispatch({type: ACTION_TYPES.LOG_OUT})
+            }} className="hover:text-secondary hover:bg-fadedOrange cursor-pointer">
+            <PowerSettingsNewIcon className="m-2.5"/>
+              <ListItemText >Logout</ListItemText>
+            </ListItem>
+            </>
+            }
         </List>
         
         <div

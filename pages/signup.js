@@ -1,13 +1,15 @@
 import React from "react";
 import Layout from "../components/Layout";
 import Button from "@material-ui/core/Button";
+import { useRouter } from 'next/router'
 import { useDispatch, useSelector } from "react-redux";
 import { ACTION_TYPES } from "../redux/actions/authAction";
 
 export default function signup() {
   const dispatch = useDispatch();
+  const router = useRouter()
   const fetchedSignUp = useSelector((state) => state.auth.signUpMsg);
-  const fetchedLogIn = useSelector((state) => state.auth.logInMsg);
+  const fetchedToken = useSelector((state) => state.auth.token);
 
   const [data, setData] = React.useState({
     email: "",
@@ -18,12 +20,13 @@ export default function signup() {
   const sign = () => {
       dispatch({type: ACTION_TYPES.SIGN_UP, payload: data})
       console.log(fetchedSignUp);
-      // dispatch({type: ACTION_TYPES.LOG_IN, payload: JSON.stringify({"username": data.email, "password": data.password})})
-      // console.log(fetchedLogIn);
+      if(fetchedToken !== "")
+      router.push('/')
   }
 
   React.useEffect(() => {
-    console.log(fetchedSignUp);
+    if(fetchedToken !== "")
+      router.push('/')
   });
 
   return (

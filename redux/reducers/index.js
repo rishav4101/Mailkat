@@ -3,13 +3,13 @@ import { HYDRATE } from "next-redux-wrapper";
 import { combineReducers } from "redux";
 
 /* IMPORT ALL REDUCERS HERE */
-import countries from "./countries"
 import auth from "./auth"
 import campaign from "./campaign"
+import mail from "./mail"
 
 /* COMBINE REDUCERS */
 const combinedReducers = combineReducers({
-    countries, auth, campaign
+   auth, campaign, mail
 })  
 
 export default function reducer(state, action) {
@@ -22,6 +22,7 @@ export default function reducer(state, action) {
             }
             // if (state.countries) nextState.countries = state.countries
             if (state.auth) nextState.auth = state.auth
+            if (state.mail) nextState.mail = state.mail
             if (state.campaign) nextState.campaign = state.campaign // Preserve state during client side navigations
             return nextState;
             

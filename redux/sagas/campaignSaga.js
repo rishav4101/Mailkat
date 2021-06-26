@@ -1,14 +1,16 @@
-import { takeEvery, put } from "redux-saga/effects";
+import { takeEvery, put, select } from "redux-saga/effects";
 import { createCampaignAction, getCampaignAction, getCampaignNamesAction, ACTION_TYPES } from "../actions/campaignAction";
 
 function* createCampaign(action) {
+    console.log("hi")
+   const tkn = yield select((state) => state.auth.token);
    const respData = yield fetch('https://api.mailkat.weblikate.com/mail/campaign', {
        method: 'POST',
        headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${tkn}`
       },
-       credentials: "include",
       body: JSON.stringify(action.payload),
    })
    
@@ -18,29 +20,31 @@ function* createCampaign(action) {
 }
 
 function* getCampaign() {
+    const tkn = yield select((state) => state.auth.token);
    const respData = yield fetch('https://api.mailkat.weblikate.com/mail/campaign', {
     method: 'GET',
     headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${tkn}`
       },
-       credentials: "include",
 });
-   const resp = respData.json();
+   const resp = yield respData.json();
    console.log(resp);
    yield put(getCampaignAction(resp)); 
 }
 
 function* getCampaignNames() {
+    const tkn = yield select((state) => state.auth.token);
     const respData = yield fetch('https://api.mailkat.weblikate.com/mail/campaignNames', {
      method: 'GET',
      headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        'Authorization': `Bearer ${tkn}`
       },
-       credentials: "include",
  });
-    const resp = respData.json();
+    const resp = yield respData.json();
     console.log(resp);
     yield put(getCampaignNamesAction(resp)); 
  }

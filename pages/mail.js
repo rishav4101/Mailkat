@@ -16,9 +16,11 @@ import {
 
 import { useDispatch, useSelector } from "react-redux";
 import { ACTION_TYPES as ac1 } from "../redux/actions/campaignAction";
+import { ACTION_TYPES as ac2 } from "../redux/actions/mailAction";
 
 import "suneditor/dist/css/suneditor.min.css"; // Import Sun Editor's CSS File
 import MultiEmail from "../components/MultiEmail";
+import { ACTION_TYPES } from "../redux/actions/authAction";
 
 const SunEditor = dynamic(() => import("suneditor-react"), {
   ssr: false,
@@ -29,12 +31,14 @@ const plugins = dynamic(() => import("suneditor/src/plugins"), {
 
 export default function Mail() {
   const dispatch = useDispatch();
-  const fetchedCampaignNames = useSelector((state) => state.campaign.campaignNames);
+  const fetchedCampaignNames = useSelector(
+    (state) => state.campaign.campaignNames
+  );
 
   React.useEffect(() => {
-    dispatch({ type:ac1.GET_CAMPAIGN_NAMES });
+    dispatch({ type: ac1.GET_CAMPAIGN_NAMES });
     console.log(fetchedCampaignNames);
-  }, [])
+  }, []);
 
   const editor = React.useRef();
 
@@ -58,23 +62,23 @@ export default function Mail() {
 
   //EMAILS
   const [toEmails, setToEmails] = React.useState([]);
-  const changeToEmails = (emails) =>{
+  const changeToEmails = (emails) => {
     setToEmails(emails);
-  }
+  };
   const [ccEmails, setCcEmails] = React.useState([]);
-  const changeCcEmails = (emails) =>{
+  const changeCcEmails = (emails) => {
     setCcEmails(emails);
-  }
+  };
   const [bccEmails, setBccEmails] = React.useState([]);
-  const changeBccEmails = (emails) =>{
+  const changeBccEmails = (emails) => {
     setBccEmails(emails);
-  }
+  };
 
   //SUBJECT
   const [subject, setSubject] = React.useState("");
-  const handleSubjectChange = (event) =>{
-    setSubject(event.target.value)
-  }
+  const handleSubjectChange = (event) => {
+    setSubject(event.target.value);
+  };
 
   //SCHEDULE HANDLERS
   const [schedule, setSchedule] = React.useState("");
@@ -87,9 +91,7 @@ export default function Mail() {
     setTimely(event.target.value);
   };
 
-  const [onceDate, setOnceDate] = React.useState(
-    new Date("2014-08-18T21:11:54")
-  );
+  const [onceDate, setOnceDate] = React.useState(new Date());
   const handleOnceDateChange = (date) => {
     setOnceDate(date);
   };
@@ -143,12 +145,11 @@ export default function Mail() {
   //ALL FORM DATA HANDLER
   const [data, setData] = React.useState({});
 
+  const mailSentMsg = useSelector((state) => state.mail.mailSentMsg);
+
   //ONSEND HANDLER
   const onSend = () => {
-
-    campaignName, subject, body, second='*', minute='*', hour='*', dayOfMonth='*', month='*', dayOfWeek='*', recurrence=null
-
-    setData({
+    const data = {
       // campaignName:camName,
       // to: toEmails,
       // cc: ccEmails,
@@ -164,45 +165,65 @@ export default function Mail() {
       // monthlyDay: monthlyDay,
       // monthlyTime: monthlyTime,
       // yearlyDate: yearlyDate,
-    });
+    };
 
-    if(camName === ""){
-      setData({...data, 
-      to: toEmails,
-      cc: ccEmails,
-      bcc: bccEmails
-    })
+    if (camName === "") {
+      (data["to"] = toEmails),
+        (data["cc"] = ccEmails),
+        (data["bcc"] = bccEmails);
     } else {
-      setData({...data, 
-        campaignName: camName
-      })
+      (data["to"] = []), (data["cc"] = []), (data["bcc"] = []);
     }
 
-    if(data.recurrence === ""){
-      setData({...data, recurrence:null})
-    }
-    else {
-      if(data.recurrence === "Once"){
-        setData({...data, second:onceDate.getSeconds(), hour:onceDate.getHours(), minute:onceDate.getMinutes(), dayOfMonth:onceDate.getDate(), month:onceDate.getMonth()  })
-      }
-      else if(data.recurrence === "Timely"){
-        setData({...data, second:timely.getSeconds() })
-      }
-      else if(data.recurrence === "Daily"){
-        setData({...data, second:dailyDate.getSeconds(), hour:dailyDate.getHours(), minute:dailyDate.getMinutes() })
-      }
-      else if(data.recurrence === "Weekly"){
-        setData({...data, second:weeklyTime.getSeconds(), hour:weeklyTime.getHours(), minute:weeklyTime.getMinutes(), dayOfWeek:weeklyDay  })
-      }
-      else if(data.recurrence === "Monthly"){
-        setData({...data, second:monthlyTime.getSeconds(), hour:monthlyTime.getHours(), minute:monthlyTime.getMinutes(), dayOfMonth:monthlyDay  })
-      }
-      else if(data.recurrence === "Yearly"){
-        setData({...data, second:yearlyDate.getSeconds(), hour:yearlyDate.getHours(), minute:yearlyDate.getMinutes(), dayOfMonth:yearlyDate.getDate(), month:yearlyDate.getMonth()  })
+    if (data.recurrence === "") {
+      data["recurrence"] = null;
+    } else {
+      if (data.recurrence === "Once") {
+       
+          data['second']= onceDate.getSeconds();
+          data['hour']= onceDate.getHours();
+          data['minute']= onceDate.getMinutes();
+          data['dayOfMonth']= onceDate.getDate();
+          data['month']= onceDate.getMonth();
+        
+      } else if (data.recurrence === "Timely") {
+        data['second']= timely;
+      } else if (data.recurrence === "Daily") {
+        
+        data['second']= dailyDate.getSeconds();
+        data['hour']= dailyDate.getHours();
+        data['minute']= dailyDate.getMinutes();
+       
+      } else if (data.recurrence === "Weekly") {
+        
+        data['second']= weeklyTime.getSeconds();
+        data['hour']= weeklyTime.getHours();
+        data['minute']= weeklyTime.getMinutes();
+        data['dayOfWeek']= weeklyDay;
+       
+      } else if (data.recurrence === "Monthly") {
+        
+        data['second']= monthlyTime.getSeconds();
+        data['hour']= monthlyTime.getHours();
+        data['minute']= monthlyTime.getMinutes();
+        data['dayOfMonth']= monthlyDay;
+        
+      } else if (data.recurrence === "Yearly") {
+        
+          data['second']= yearlyDate.getSeconds();
+          data['hour']= yearlyDate.getHours();
+          data['minute']= yearlyDate.getMinutes();
+          data['dayOfMonth']= yearlyDate.getDate();
+          data['month']= yearlyDate.getMonth();
+       
       }
     }
 
     console.log(data);
+
+    dispatch({ type: ac2.SEND_MAIL, payload: data });
+
+    console.log(mailSentMsg);
   };
 
   //RENDER
@@ -216,7 +237,7 @@ export default function Mail() {
           >
             <h1 className="text-3xl lg:text-5xl my-5">Create a new mail</h1>
             <div className="flex flex-row flex-wrap">
-            <div className="w-52 m-3">
+              <div className="w-52 m-3">
                 <FormControl variant="outlined" className="w-full">
                   <InputLabel id="demo-simple-select-filled-label">
                     Select Campaign
@@ -230,32 +251,41 @@ export default function Mail() {
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    <MenuItem value={"Once"}>Once</MenuItem>
-                    <MenuItem value={"Timely"}>Timely</MenuItem>
+                    {fetchedCampaignNames.map((cm) => (
+                      <MenuItem value={cm}>{cm}</MenuItem>
+                    ))}
                   </Select>
                 </FormControl>
               </div>
-              <div className="w-full p-2">
-                <MultiEmail
-                  email={toEmails}
-                  handler={changeToEmails}
-                  placeholder="To"
-                />
-              </div>
-              <div className="w-full p-2">
-                <MultiEmail
-                  email={ccEmails}
-                  handler={changeCcEmails}
-                  placeholder="Cc"
-                />
-              </div>
-              <div className="w-full p-2">
-                <MultiEmail
-                  email={bccEmails}
-                  handler={changeBccEmails}
-                  placeholder="Bcc"
-                />
-              </div>
+
+              {camName === "" ? (
+                <>
+                  <div className="w-full p-2">
+                    <MultiEmail
+                      email={toEmails}
+                      handler={changeToEmails}
+                      placeholder="To"
+                    />
+                  </div>
+                  <div className="w-full p-2">
+                    <MultiEmail
+                      email={ccEmails}
+                      handler={changeCcEmails}
+                      placeholder="Cc"
+                    />
+                  </div>
+                  <div className="w-full p-2">
+                    <MultiEmail
+                      email={bccEmails}
+                      handler={changeBccEmails}
+                      placeholder="Bcc"
+                    />
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
+
               <div className="w-full p-2">
                 <TextField
                   className="w-full"

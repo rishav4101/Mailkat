@@ -8,9 +8,20 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { useTableStyles } from "../components/Styles";
+import { useDispatch, useSelector } from "react-redux";
+import { ACTION_TYPES } from "../redux/actions/mailAction";
 
 export default function History() {
-    const classes = useTableStyles();
+  const dispatch = useDispatch();
+  const classes = useTableStyles();
+
+  const fetchedHistory = useSelector((state) => state.mail.history);
+  const classes = useTableStyles();
+
+  React.useEffect(() => {
+    dispatch({ type: ACTION_TYPES.GET_HISTORY });
+    console.log(fetchedHistory);
+  }, []);
 
   const columns = [
     { id: "id", label: "Universal ID", minWidth: 170 },
@@ -21,52 +32,53 @@ export default function History() {
     { id: "owner", label: "Owner", minWidth: 170 },
     { id: "lastAction", label: "Last Action", minWidth: 170 },
   ];
-  return <Layout>
-
-<Paper className={classes.TableRoot2}>
-            <TableContainer className={classes.TableContainer}>
-              <Table stickyHeader aria-label="sticky table">
-                <TableHead>
-                  <TableRow>
-                    {columns.map((column) => (
-                      <TableCell
-                        key={column.id}
-                        align="center"
-                        className={classes.TableHead}
-                        // style={{ minWidth: column.minWidth }}
-                      >
-                        {column.label}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  <TableRow hover role="checkbox" tabIndex={-1}>
-                    <TableCell className={classes.TableCell} align="center">
-                      first
-                    </TableCell>
-                    <TableCell className={classes.TableCell} align="center">
-                      first
-                    </TableCell>
-                    <TableCell className={classes.TableCell} align="center">
-                      first
-                    </TableCell>
-                    <TableCell className={classes.TableCell} align="center">
-                      first
-                    </TableCell>
-                    <TableCell className={classes.TableCell} align="center">
-                      first
-                    </TableCell>
-                    <TableCell className={classes.TableCell} align="center">
-                      first
-                    </TableCell>
-                    <TableCell className={classes.TableCell} align="center">
-                      first
-                    </TableCell>
-                  </TableRow>
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Paper>
-  </Layout>;
+  return (
+    <Layout>
+      <Paper className={classes.TableRoot2}>
+        <TableContainer className={classes.TableContainer}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                {columns.map((column) => (
+                  <TableCell
+                    key={column.id}
+                    align="center"
+                    className={classes.TableHead}
+                    // style={{ minWidth: column.minWidth }}
+                  >
+                    {column.label}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              <TableRow hover role="checkbox" tabIndex={-1}>
+                <TableCell className={classes.TableCell} align="center">
+                  first
+                </TableCell>
+                <TableCell className={classes.TableCell} align="center">
+                  first
+                </TableCell>
+                <TableCell className={classes.TableCell} align="center">
+                  first
+                </TableCell>
+                <TableCell className={classes.TableCell} align="center">
+                  first
+                </TableCell>
+                <TableCell className={classes.TableCell} align="center">
+                  first
+                </TableCell>
+                <TableCell className={classes.TableCell} align="center">
+                  first
+                </TableCell>
+                <TableCell className={classes.TableCell} align="center">
+                  first
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+    </Layout>
+  );
 }
