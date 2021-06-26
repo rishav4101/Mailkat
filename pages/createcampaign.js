@@ -75,7 +75,7 @@ export default function Createcampaign() {
                   <img
                     style={{
                       objectFit: "contain",
-                      maxWidth: "100%",
+                      maxWidth: "120%",
                       height: "auto",
                     }}
                     src="./Login.svg"
