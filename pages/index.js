@@ -38,6 +38,7 @@ export default function Home() {
       <Head>
         <title>Mailkat</title>
         <meta name="description" content="Mailkat official website" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta charset="utf-8" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.49.0/lib/codemirror.min.css"></link>
@@ -46,12 +47,12 @@ export default function Home() {
       <main>
         <Layout>
           <div className="flex flex-row flex-wrap-reverse my-10">
-            <div className="flex flex-col justify-center items-center text-center lg:items-start lg:text-left mx-auto max-w-lg">
-              <h1 className="text-4xl lg:text-6xl ">
-                Tired of manual mailings?
+            <div className="flex flex-col justify-center items-center text-center xl:items-start xl:text-left mx-auto max-w-xl">
+              <h1 className="text-4xl lg:text-6xl xl:text-7xl ">
+                Need help with your mailings?
               </h1>
-              <h2 className="text-xl lg:text-2xl ">
-                MAILKAT is here to rescue.
+              <h2 className="text-xl lg:text-2xl my-5">
+                MailKat is here to rescue you.
               </h2>
             </div>
             <div className="flex flex-row justify-center items-center mx-auto">
@@ -66,10 +67,10 @@ export default function Home() {
           <div className="w-full rounded-sm p-5 lg:p-10 flex flex-row flex-wrap justify-between items-center bg-fadedOrange rounded-xl">
             <div className="flex flex-col justify-center items-center text-center sm:items-start sm:text-left mx-auto lg:mx-0">
               <h1 className="text-2xl lg:text-4xl ">
-                Start now by creating a new email.
+                Start now by creating a new campaign.
               </h1>
               <h2 className="text-lg lg:text-xl ">
-                MAILKAT is here to rescue.
+                You can create a campaign to send mails to mutiple audience, schedule it recurrence or for once and reuse the campaign audience. 
               </h2>
             </div>
             <div className="flex justify-center items-center lg:items-end lg:text-right mx-auto lg:mx-0">

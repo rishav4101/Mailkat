@@ -18,12 +18,12 @@ export default function Login() {
   const sign = () => {
     dispatch({type: ACTION_TYPES.LOG_IN, payload: data})
     console.log(fetchedLogIn);
-    if(fetchedToken !== "")
+    if(fetchedToken !== "" && fetchedToken)
       router.push('/')
 }
 
   React.useEffect(() => {
-    if(fetchedToken !== "")
+    if(fetchedToken !== ""  && fetchedToken)
         router.push('/')
   });
 

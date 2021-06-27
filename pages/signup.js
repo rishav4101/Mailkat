@@ -20,12 +20,12 @@ export default function signup() {
   const sign = () => {
       dispatch({type: ACTION_TYPES.SIGN_UP, payload: data})
       console.log(fetchedSignUp);
-      if(fetchedToken !== "")
+      if(fetchedToken !== "" && fetchedToken)
       router.push('/')
   }
 
   React.useEffect(() => {
-    if(fetchedToken !== "")
+    if(fetchedToken !== "" && fetchedToken)
       router.push('/')
   });
 

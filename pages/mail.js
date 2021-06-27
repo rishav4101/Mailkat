@@ -170,33 +170,33 @@ export default function Mail() {
       data["recurrence"] = null;
     } else {
       if (data.recurrence === "Once") {
-        data["second"] = onceDate.getSeconds();
-        data["hour"] = onceDate.getHours();
-        data["minute"] = onceDate.getMinutes();
-        data["dayOfMonth"] = onceDate.getDate();
-        data["month"] = onceDate.getMonth();
+        data["second"] = onceDate.getUTCSeconds();
+        data["hour"] = onceDate.getUTCHours();
+        data["minute"] = onceDate.getUTCMinutes();
+        data["dayOfMonth"] = onceDate.getUTCDate();
+        data["month"] = onceDate.getUTCMonth();
       } else if (data.recurrence === "Timely") {
         data["second"] = timely;
       } else if (data.recurrence === "Daily") {
-        data["second"] = dailyDate.getSeconds();
-        data["hour"] = dailyDate.getHours();
-        data["minute"] = dailyDate.getMinutes();
+        data["second"] = dailyDate.getUTCSeconds();
+        data["hour"] = dailyDate.getUTCHours();
+        data["minute"] = dailyDate.getUTCMinutes();
       } else if (data.recurrence === "Weekly") {
-        data["second"] = weeklyTime.getSeconds();
-        data["hour"] = weeklyTime.getHours();
-        data["minute"] = weeklyTime.getMinutes();
+        data["second"] = weeklyTime.getUTCSeconds();
+        data["hour"] = weeklyTime.getUTCHours();
+        data["minute"] = weeklyTime.getUTCMinutes();
         data["dayOfWeek"] = weeklyDay;
       } else if (data.recurrence === "Monthly") {
-        data["second"] = monthlyTime.getSeconds();
-        data["hour"] = monthlyTime.getHours();
-        data["minute"] = monthlyTime.getMinutes();
+        data["second"] = monthlyTime.getUTCSeconds();
+        data["hour"] = monthlyTime.getUTCHours();
+        data["minute"] = monthlyTime.getUTCMinutes();
         data["dayOfMonth"] = monthlyDay;
       } else if (data.recurrence === "Yearly") {
-        data["second"] = yearlyDate.getSeconds();
-        data["hour"] = yearlyDate.getHours();
-        data["minute"] = yearlyDate.getMinutes();
-        data["dayOfMonth"] = yearlyDate.getDate();
-        data["month"] = yearlyDate.getMonth();
+        data["second"] = yearlyDate.getUTCSeconds();
+        data["hour"] = yearlyDate.getUTCHours();
+        data["minute"] = yearlyDate.getUTCMinutes();
+        data["dayOfMonth"] = yearlyDate.getUTCDate();
+        data["month"] = yearlyDate.getUTCMonth();
       }
     }
 

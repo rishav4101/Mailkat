@@ -112,7 +112,7 @@ export default function PersistentDrawerLeft({ children }) {
             </ListItem>
             </Link>
 
-          {fetchedToken === "" ? 
+          {fetchedToken === "" || !fetchedToken ? 
           <>
           <Link href="/login">
           <ListItem className="hover:text-secondary hover:bg-fadedOrange cursor-pointer">
