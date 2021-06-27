@@ -64,7 +64,7 @@ export default function Allcampaign() {
             </TableHead>
             <TableBody>
             {Array.isArray(getCampaign) ?
-              (getCampaign.map((his) => (
+              (getCampaign.map((cam) => (
              
                   <>
                     <TableRow hover role="checkbox" tabIndex={-1}>
