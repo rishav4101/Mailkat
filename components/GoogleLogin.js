@@ -47,8 +47,8 @@ export default function Glogin(props) {
     <>
       <GoogleLogin
         clientId={process.env.NEXT_PUBLIC_LOGIN_CLIENT_ID}
-        // accessType="offline"
-        // responseType="code"
+        accessType="offline"
+        responseType="code"
         // isSignedIn={true}
         approvalPrompt="force"
         prompt="consent"
@@ -59,7 +59,7 @@ export default function Glogin(props) {
           console.log(res);
           dispatch({
             type: ACTION_TYPES.G_LOG_IN,
-            payload: { idToken: res.tokenId },
+            payload: res,
           });
           if (fetchedToken !== "" && fetchedToken) router.push("/");
         }}
