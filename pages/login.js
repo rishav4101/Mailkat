@@ -73,7 +73,8 @@ export default function Login() {
                             setData({ ...data, username: e.target.value });
                             console.log(data);
                           }}
-                        ></input>&nbsp;
+                        ></input>
+                        &nbsp;
                       </div>
                       <div className="mt-4">
                         <div className="flex justify-between items-center">
@@ -90,7 +91,8 @@ export default function Login() {
                             setData({ ...data, password: e.target.value });
                             console.log(data);
                           }}
-                        ></input>&nbsp;
+                        ></input>
+                        &nbsp;
                       </div>
                       <div className="mt-4">
                         <div className="flex justify-center items-center lg:items-end lg:text-right mx-auto lg:mx-0">
@@ -115,9 +117,9 @@ export default function Login() {
                       Or
                     </div>
                     {/* Google signup  */}
-                    <GLogin text="Login with google" />
+                    <GLogin text="Login with Google" />
                     <div className="mt-4 text-sm font-display font-semibold text-gray-700 text-center">
-                      Dont have an account ? &nbsp;
+                      Don't have an account ? &nbsp;
                       <Link
                         className="cursor-pointer text-indigo-600 hover:text-indigo-800"
                         style={{ color: "red", fontWeight: "bold" }}
@@ -134,8 +136,7 @@ export default function Login() {
                 style={{ height: "auto" }}
               >
                 <div className="max-w-xs transform duration-200 hover:scale-110 cursor-pointer">
-                <Image src={pic} alt="."  width={416} height={341.25}/>
-                
+                  <Image src={pic} alt="." width={416} height={341.25} />
                 </div>
               </div>
             </div>
