@@ -26,58 +26,70 @@ MailKat
 
 <h3 align="center">A Mailing and Mail Scheduling App.</h3>
 
-## Description
+# Description
 MailKat is a MERN-based full-stack web app where users can register and login to send recurring and scheduled mails to the recipients.
 MailKat has options for custom as well as google sign-in methods. User can create mails, edit them and schedule the mails as well as send recurring mails.
 It also has option to create Campaigns with multiple recipients and reuse the campaigns to send emails to same audience.
 The scheduling can be done in different ways like-
 1. Once
-2. Timely Schedule
-3. Daily Schedule
-4. Weekly Schedule
-5. Monthly Schedule
-6. Yearly Schedule 
+2. Timely Schedule (after a set number of seconds)
+3. Daily Schedule (daily at a set time)
+4. Weekly Schedule (weekly at a set time)
+5. Monthly Schedule (monthly at a set date and time)
+6. Yearly Schedule (yearly at a set date and time)
 <br/>
  
- ## Features
- * MailKat features Login and signup via Username - password as well as Gmail Sync (Login with Gmail).
+ # Features
+ * MailKat features Login and SignUp via Username - Password as well as Gmail Sync (Login with Gmail).
  * A Home page that has the list of all the mails scheduled for future.
+ * Create a campaign to form a set of recipients to schedule mail to.
+ * View all your email campaigns
  * A History Page that has the list of mails sent till now.
  * Create new mail, Edit it with MailKat's own Text Editor.
- * The Editor has features of bold, italics, image insert, print option, code view, save option and many more.
+ * The Editor has features of bold, italics, text colour and many more.
  
- ## Mail Structure
-* Campaign Name
+## Mail Features
+### Send mail via campaign:
+* Subject
+* Schedule Selector (type of schedule and timings)
+* Mail Body
+* Campaign Selector
+### Without campaign:
 * To
-* Cc & Bcc (If used without campaign)
+* CC
+* BCC
 * Subject
 * Mail Body
-* Schedule Type and Schedule
+* Schedule Selector (type of schedule and timings)
 
-## Architecture Diagram
+
+# Architecture Diagram
 <p align="center">
    <br>
   <a><img src="https://github.com/AbhinavKrishna26/Mailkat-Frontend/blob/main/public/Screenshot%202021-06-27%20at%2012.23.57%20AM.png" width="800"></a>
   <br> 
 </p>
 
-## Installation and Setup for frontend
-Clone the repository 
+# Installation and Setup 
+
+## For frontend:
+* ### Clone the repository 
 ```Bash
 git clone https://github.com/rishav4101/Mailkat-Frontend.git && cd Mailkat-Frontend
 ```
-Install dependencies
+* ### Install dependencies
 ```Bash
 npm install
 ```
-Start the Application
+* ### Start the Application
 ```Bash
 npm run dev
 ```
  
-The app gets hosted by default at port 3000.
+### The app gets hosted by default at port 3000.
+<br>
 
-## Installation and Setup for backend
+## For backend:
 
 * ### Clone the repository 
 ```Bash
