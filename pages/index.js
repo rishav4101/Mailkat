@@ -110,7 +110,8 @@ export default function Home() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {fetchedSchedule.map((his) => (
+                  {Array.isArray(fetchedSchedule) ?
+                  (fetchedSchedule.map((his) => (
                     <TableRow
                       hover
                       role="checkbox"
@@ -130,7 +131,7 @@ export default function Home() {
                         {his.nextMailTime}
                       </TableCell>
                     </TableRow>
-                  ))}
+                  ))) : <></>}
                 </TableBody>
               </Table>
             </TableContainer>
