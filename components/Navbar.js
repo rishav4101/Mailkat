@@ -27,6 +27,8 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { ACTION_TYPES } from "../redux/actions/authAction";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import pic from "../public/logo2.png";
 
 export default function PersistentDrawerLeft({ children }) {
   const router = useRouter();
@@ -78,11 +80,12 @@ export default function PersistentDrawerLeft({ children }) {
           >
             <a href="/">
               {" "}
-              <img
+              <Image src={pic} alt="." width={115.2} height={49.5} />
+              {/* <img
                 alt="."
                 src="/logo2.png"
                 style={{ height: "55px", width: "auto", cursor: "pointer" }}
-              />
+              /> */}
             </a>
             {/* &nbsp;MailKat */}
           </Typography>
@@ -118,14 +121,14 @@ export default function PersistentDrawerLeft({ children }) {
             </ListItem>
           </Link>
 
-          {fetchedToken === "" || !fetchedToken ? 
-         ( <>
-          <Link href="/login">
-          <ListItem className="hover:text-secondary hover:bg-fadedOrange cursor-pointer">
-            <PowerSettingsNewIcon className="m-2.5"/>
-              <ListItemText >Login</ListItemText>
-            </ListItem>
-            </Link>
+          {fetchedToken === "" || !fetchedToken ? (
+            <>
+              <Link href="/login">
+                <ListItem className="hover:text-secondary hover:bg-fadedOrange cursor-pointer">
+                  <PowerSettingsNewIcon className="m-2.5" />
+                  <ListItemText>Login</ListItemText>
+                </ListItem>
+              </Link>
 
               <Link href="/signup">
                 <ListItem className="hover:text-secondary hover:bg-fadedOrange cursor-pointer">

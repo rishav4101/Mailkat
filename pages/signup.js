@@ -4,6 +4,8 @@ import Button from "@material-ui/core/Button";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { ACTION_TYPES } from "../redux/actions/authAction";
+import Image from "next/image";
+import pic from "../public/signup.svg";
 
 export default function signup() {
   const dispatch = useDispatch();
@@ -18,15 +20,13 @@ export default function signup() {
   });
 
   const sign = () => {
-      dispatch({type: ACTION_TYPES.SIGN_UP, payload: data})
-      console.log(fetchedSignUp);
-      if(fetchedToken !== "" && fetchedToken)
-      router.push('/')
-  }
+    dispatch({ type: ACTION_TYPES.SIGN_UP, payload: data });
+    console.log(fetchedSignUp);
+    if (fetchedToken !== "" && fetchedToken) router.push("/");
+  };
 
   React.useEffect(() => {
-    if(fetchedToken !== "" && fetchedToken)
-      router.push('/')
+    if (fetchedToken !== "" && fetchedToken) router.push("/");
   });
 
   return (
@@ -130,11 +130,11 @@ export default function signup() {
                     {/* Google signup  */}
                     <a className="flex justify-center items-center lg:items-end lg:text-right mx-auto lg:mx-0">
                       <button
-                        class="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
+                        className="w-full max-w-xs font-bold shadow-sm rounded-lg py-3 bg-indigo-100 text-gray-800 flex items-center justify-center transition-all duration-300 ease-in-out focus:outline-none hover:shadow focus:shadow-sm focus:shadow-outline"
                         style={{ backgroundColor: "antiquewhite" }}
                       >
-                        <div class="bg-white p-2 rounded-full">
-                          <svg class="w-4" viewBox="0 0 533.5 544.3">
+                        <div className="bg-white p-2 rounded-full">
+                          <svg className="w-4" viewBox="0 0 533.5 544.3">
                             <path
                               d="M533.5 278.4c0-18.5-1.5-37.1-4.7-55.3H272.1v104.8h147c-6.1 33.8-25.7 63.7-54.4 82.7v68h87.7c51.5-47.4 81.1-117.4 81.1-200.2z"
                               fill="#4285f4"
@@ -176,14 +176,10 @@ export default function signup() {
                 style={{ height: "auto" }}
               >
                 <div className="max-w-xs transform duration-200 hover:scale-110 cursor-pointer">
-                  <img
-                    style={{
-                      objectFit: "contain",
-                      maxWidth: "130%",
-                      height: "auto",
-                    }}
-                    src="./signup.svg"
+                  <Image
+                    src={pic}
                     alt="."
+                   
                   />
                 </div>
               </div>

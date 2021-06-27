@@ -49,7 +49,9 @@ export default function History() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {fetchedHistory.map((his) => (
+            {Array.isArray(fetchedHistory) ?
+            (fetchedHistory.map((his) => (
+              
                 <TableRow
                   hover
                   role="checkbox"
@@ -69,7 +71,7 @@ export default function History() {
                     {his.lastSent}
                   </TableCell>
                 </TableRow>
-              ))}
+              ))):<> </>}
             </TableBody>
           </Table>
         </TableContainer>
