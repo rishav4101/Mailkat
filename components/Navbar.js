@@ -189,12 +189,12 @@ export default function PersistentDrawerLeft({ children }) {
               fontSize: 17,
             }}
           >
-            By Team Weblikate &nbsp;&nbsp;
+         
             <a
               style={{ textDecoration: "none" }}
-              href="https://github.com/rishav4101/eth-supplychain-dapp"
+              href="https://github.com/rishav4101/Mailkat"
             >
-              <GitHubIcon style={{ color: "#fff" }} />
+              <GitHubIcon/> 
             </a>
           </div>
         </div>
