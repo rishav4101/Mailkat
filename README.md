@@ -61,7 +61,7 @@ The scheduling can be done in different ways like-
   <br> 
 </p>
 
-## Installation and Setup
+## Installation and Setup for frontend
 Clone the repository 
 ```Bash
 git clone https://github.com/rishav4101/Mailkat-Frontend.git && cd Mailkat-Frontend
@@ -77,3 +77,26 @@ npm run dev
  
 The app gets hosted by default at port 3000.
 
+## Installation and Setup for backend
+
+* ### Clone the repository 
+```Bash
+git clone https://github.com/deadlycoder07/mailkat-backend.git && cd mailkat-backend
+```
+* ### Install dependencies
+```Bash
+npm install
+```
+
+* ### Create .env and add the environment variable values as mentioned in .env.example
+
+```
+cp .env.example .env
+```
+
+* ### Start the Application
+```Bash
+npm start
+```
+ 
+* ### The app gets hosted by default at port 8000.
