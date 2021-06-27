@@ -1,7 +1,7 @@
 import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { ACTION_TYPES  } from "../redux/actions/mailAction";
+import { ACTION_TYPES } from "../redux/actions/mailAction";
 import React from "react";
 import Layout from "../components/Layout";
 import Button from "@material-ui/core/Button";
@@ -13,6 +13,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { useTableStyles } from "../components/Styles";
+import Floating from "../components/Floating";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -41,7 +42,10 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta charset="utf-8" />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/codemirror@5.49.0/lib/codemirror.min.css"></link>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/codemirror@5.49.0/lib/codemirror.min.css"
+        ></link>
       </Head>
 
       <main>
@@ -133,6 +137,7 @@ export default function Home() {
               </Table>
             </TableContainer>
           </Paper>
+          <Floating />
         </Layout>
       </main>
     </div>

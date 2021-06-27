@@ -10,6 +10,7 @@ import TableRow from "@material-ui/core/TableRow";
 import { useTableStyles } from "../components/Styles";
 import { useDispatch, useSelector } from "react-redux";
 import { ACTION_TYPES } from "../redux/actions/campaignAction";
+import Floating from "../components/Floating";
 
 export default function Allcampaign() {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ export default function Allcampaign() {
 
   React.useEffect(() => {
     dispatch({
-      type: ACTION_TYPES.GET_CAMPAIGN
+      type: ACTION_TYPES.GET_CAMPAIGN,
     });
     console.log(getCampaign);
   }, []);
@@ -50,33 +51,35 @@ export default function Allcampaign() {
               </TableRow>
             </TableHead>
             <TableBody>
-               {getCampaign ? 
-                (getCampaign?.map((cam) => (
+              {getCampaign ? (
+                getCampaign?.map((cam) => (
                   <>
-                  <TableRow hover role="checkbox" tabIndex={-1}>
-                  <TableCell
-                  className={classes.TableCell}
-                  style={{ width: "50%", fontWeight: "bold" }}
-                  align="center"
-                >
-                  {cam.campaignName}
-                </TableCell>
-                <TableCell
-                  className={classes.TableCell}
-                  style={{ width: "50%", fontWeight: "bold" }}
-                  align="center"
-                >
-                  {cam.to.map((em) => (em + " "))}
-                </TableCell>
-                </TableRow>
-                </>
-                ))) : <></>} 
-                
-             
+                    <TableRow hover role="checkbox" tabIndex={-1}>
+                      <TableCell
+                        className={classes.TableCell}
+                        style={{ width: "50%", fontWeight: "bold" }}
+                        align="center"
+                      >
+                        {cam.campaignName}
+                      </TableCell>
+                      <TableCell
+                        className={classes.TableCell}
+                        style={{ width: "50%", fontWeight: "bold" }}
+                        align="center"
+                      >
+                        {cam.to.map((em) => em + " ")}
+                      </TableCell>
+                    </TableRow>
+                  </>
+                ))
+              ) : (
+                <></>
+              )}
             </TableBody>
           </Table>
         </TableContainer>
       </Paper>
+      <Floating />
     </Layout>
   );
 }

@@ -10,14 +10,13 @@ import TableRow from "@material-ui/core/TableRow";
 import { useTableStyles } from "../components/Styles";
 import { useDispatch, useSelector } from "react-redux";
 import { ACTION_TYPES } from "../redux/actions/mailAction";
+import Floating from "../components/Floating";
 
 export default function History() {
   const dispatch = useDispatch();
   const classes = useTableStyles();
 
   const fetchedHistory = useSelector((state) => state.mail.history);
-  const classes = useTableStyles();
-
   // React.useEffect(() => {
   //   dispatch({ type: ACTION_TYPES.GET_HISTORY });
   //   console.log(fetchedHistory);
@@ -79,6 +78,7 @@ export default function History() {
           </Table>
         </TableContainer>
       </Paper>
+      <Floating />
     </Layout>
   );
 }
