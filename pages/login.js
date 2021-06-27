@@ -8,7 +8,6 @@ import GLogin from "../components/GoogleLogin";
 import Link from "next/link";
 import Image from "next/image";
 import pic from "../public/Login.svg";
-import { delay } from "@redux-saga/core/effects";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -23,7 +22,6 @@ export default function Login() {
 
   const sign = () => {
     dispatch({ type: ACTION_TYPES.LOG_IN, payload: data });
-    delay(300)
     setMsg(fetchedLogIn);
     if (fetchedToken !== "" && fetchedToken) router.push("/");
   };
@@ -84,7 +82,7 @@ export default function Login() {
                         </div>
                         <input
                           className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
-                          type=""
+                          type="password"
                           placeholder="Enter your password"
                           value={data.password}
                           onChange={(e) => {

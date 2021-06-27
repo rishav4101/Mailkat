@@ -17,7 +17,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { ACTION_TYPES as ac1 } from "../redux/actions/campaignAction";
 import { ACTION_TYPES as ac2 } from "../redux/actions/mailAction";
-
+import Alert from '@material-ui/lab/Alert';
 import "suneditor/dist/css/suneditor.min.css"; // Import Sun Editor's CSS File
 import MultiEmail from "../components/MultiEmail";
 import { ACTION_TYPES } from "../redux/actions/authAction";
@@ -37,6 +37,8 @@ export default function Mail() {
   );
   const fetchedToken = useSelector((state) => state.auth.token);
 
+  const [msg, setMsg] = React.useState(""); 
+
   React.useEffect(() => {
     if (fetchedToken === "" || !fetchedToken) router.push("/");
     dispatch({ type: ac1.GET_CAMPAIGN_NAMES });
@@ -45,7 +47,7 @@ export default function Mail() {
   React.useEffect(() => {
     if (fetchedToken === "" || !fetchedToken) router.push("/");
   });
-  
+
   const editor = React.useRef();
 
   // The sunEditor parameter will be set to the core suneditor instance when this function is called
@@ -209,8 +211,10 @@ export default function Mail() {
     console.log(data);
 
     dispatch({ type: ac2.SEND_MAIL, payload: data });
-
     console.log(mailSentMsg);
+    setMsg(mailSentMsg);
+    
+    
   };
 
   //RENDER
@@ -222,6 +226,7 @@ export default function Mail() {
             className="flex flex-col justify-center rounded-xl p-7"
             style={{ boxShadow: "0px 0px 20px #ffccbc" }}
           >
+            {msg === 200 ? <Alert severity="success">Mail is scheduled!</Alert> :<></>}
             <h1 className="text-3xl lg:text-5xl my-5">Create a new mail</h1>
             <div className="flex flex-row flex-wrap">
               <div className="w-52 m-3">

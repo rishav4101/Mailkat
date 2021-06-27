@@ -21,9 +21,9 @@ function* sendMail(action) {
     body: JSON.stringify(action.payload),
   });
 
-  const resp = yield respData.json();
-  console.log(resp);
-  yield put(sendMailAction(resp.message));
+//   const resp = yield respData.json();
+  console.log(respData);
+  yield put(sendMailAction(respData.status));
 }
 
 function* getHistory() {

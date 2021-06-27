@@ -20,11 +20,11 @@ export default function Signup() {
     email: "",
     username: "",
     password: "",
+    name:""
   });
 
   const sign = () => {
     dispatch({ type: ACTION_TYPES.SIGN_UP, payload: data });
-    delay(300)
     setMsg(fetchedSignUp);
     console.log(fetchedSignUp);
     if (fetchedToken !== "" && fetchedToken) router.push("/");
@@ -62,8 +62,22 @@ export default function Signup() {
                   {msg === undefined ? <h5 className="text-primary mx-auto mt-3 text-center w-full">Error Occured</h5> : <></>}
                   <div className="mt-12">
                     <form>
-                      <div>
-                        <div className="text-sm font-bold text-gray-700 tracking-wide">
+                      
+                        <div className="mt-4 text-sm font-bold text-gray-700 tracking-wide">
+                          Name
+                        </div>
+                        <input
+                          className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+                          type=""
+                          placeholder="Enter your name"
+                          value={data.name}
+                          onChange={(e) => {
+                            setData({ ...data, name: e.target.value });
+                            console.log(data);
+                          }}
+                        ></input>
+                        <div>
+                        <div className="mt-4 text-sm font-bold text-gray-700 tracking-wide">
                           Email Address
                         </div>
                         <input
@@ -75,7 +89,7 @@ export default function Signup() {
                             setData({ ...data, email: e.target.value });
                             console.log(data);
                           }}
-                        ></input>{" "}
+                        ></input>
                       </div>
                       <div className="mt-4">
                         <div className="flex justify-between items-center">
@@ -92,7 +106,7 @@ export default function Signup() {
                             setData({ ...data, username: e.target.value });
                             console.log(data);
                           }}
-                        ></input>{" "}
+                        ></input>
                       </div>
                       <div className="mt-4">
                         <div className="flex justify-between items-center">
@@ -102,14 +116,14 @@ export default function Signup() {
                         </div>
                         <input
                           className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
-                          type=""
+                          type="password"
                           placeholder="Enter your password"
                           value={data.password}
                           onChange={(e) => {
                             setData({ ...data, password: e.target.value });
                             console.log(data);
                           }}
-                        ></input>{" "}
+                        ></input>
                       </div>
                       <div className="mt-4">
                         <div className="flex justify-center items-center lg:items-end lg:text-right mx-auto lg:mx-0">
