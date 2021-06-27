@@ -119,7 +119,7 @@ export default function Login() {
                     {/* Google signup  */}
                     <GLogin text="Login with Google" />
                     <div className="mt-4 text-sm font-display font-semibold text-gray-700 text-center">
-                      Don't have an account ? &nbsp;
+                      Dont have an account ? &nbsp;
                       <Link
                         className="cursor-pointer text-indigo-600 hover:text-indigo-800"
                         style={{ color: "red", fontWeight: "bold" }}
