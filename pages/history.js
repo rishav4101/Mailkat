@@ -18,10 +18,10 @@ export default function History() {
   const fetchedHistory = useSelector((state) => state.mail.history);
   const classes = useTableStyles();
 
-  React.useEffect(() => {
-    dispatch({ type: ACTION_TYPES.GET_HISTORY });
-    console.log(fetchedHistory);
-  }, []);
+  // React.useEffect(() => {
+  //   dispatch({ type: ACTION_TYPES.GET_HISTORY });
+  //   console.log(fetchedHistory);
+  // }, []);
 
   const columns = [
     { id: "id", label: "Universal ID", minWidth: 170 },

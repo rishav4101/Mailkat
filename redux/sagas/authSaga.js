@@ -2,7 +2,7 @@ import { takeEvery, put } from "redux-saga/effects";
 import { signUpAction, logInAction, logOutAction, ACTION_TYPES } from "../actions/authAction";
 
 function* signUp(action) {
-   const respData = yield fetch('https://api.mailkat.weblikate.com/auth/signup', {
+   const respData = yield fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/signup`, {
        method: 'POST',
        headers: {
         'Content-Type': 'application/json',
@@ -16,7 +16,7 @@ function* signUp(action) {
 }
 
 function* logIn(action) {
-   const respData = yield fetch('https://api.mailkat.weblikate.com/auth/login', {
+   const respData = yield fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
     method: 'POST',
     headers: {
      'Content-Type': 'application/json',

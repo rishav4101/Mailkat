@@ -4,7 +4,7 @@ import { createCampaignAction, getCampaignAction, getCampaignNamesAction, ACTION
 function* createCampaign(action) {
     console.log("hi")
    const tkn = yield select((state) => state.auth.token);
-   const respData = yield fetch('https://api.mailkat.weblikate.com/mail/campaign', {
+   const respData = yield fetch(`${process.env.NEXT_PUBLIC_API_URL}/mail/campaign`, {
        method: 'POST',
        headers: {
         Accept: 'application/json',
@@ -21,7 +21,7 @@ function* createCampaign(action) {
 
 function* getCampaign() {
     const tkn = yield select((state) => state.auth.token);
-   const respData = yield fetch('https://api.mailkat.weblikate.com/mail/campaign', {
+   const respData = yield fetch(`${process.env.NEXT_PUBLIC_API_URL}/mail/campaign`, {
     method: 'GET',
     headers: {
         Accept: 'application/json',
@@ -36,7 +36,7 @@ function* getCampaign() {
 
 function* getCampaignNames() {
     const tkn = yield select((state) => state.auth.token);
-    const respData = yield fetch('https://api.mailkat.weblikate.com/mail/campaignNames', {
+    const respData = yield fetch(`${process.env.NEXT_PUBLIC_API_URL}/mail/campaignNames`, {
      method: 'GET',
      headers: {
         Accept: 'application/json',

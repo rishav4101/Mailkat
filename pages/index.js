@@ -19,10 +19,10 @@ export default function Home() {
   const fetchedSchedule = useSelector((state) => state.mail.schedule);
   const classes = useTableStyles();
 
-  React.useEffect(() => {
-    dispatch({type:ACTION_TYPES.GET_SCHEDULE})
-    console.log(fetchedSchedule)
-  }, []);
+  // React.useEffect(() => {
+  //   dispatch({type:ACTION_TYPES.GET_SCHEDULE})
+  //   console.log(fetchedSchedule)
+  // }, []);
 
   const columns = [
     { id: "id", label: "Universal ID", minWidth: 170 },
@@ -90,7 +90,7 @@ export default function Home() {
           <Paper className={classes.TableRoot2}>
             <TableContainer className={classes.TableContainer}>
               <Table stickyHeader aria-label="sticky table">
-                <TableHead>
+                {/* <TableHead>
                   <TableRow>
                     {columns.map((column) => (
                       <TableCell
@@ -103,7 +103,7 @@ export default function Home() {
                       </TableCell>
                     ))}
                   </TableRow>
-                </TableHead>
+                </TableHead> */}
                 <TableBody>
                   <TableRow hover role="checkbox" tabIndex={-1}>
                     <TableCell className={classes.TableCell} align="center">

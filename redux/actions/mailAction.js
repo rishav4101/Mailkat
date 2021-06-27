@@ -4,7 +4,9 @@ export const ACTION_TYPES = {
     GET_SCHEDULE: "GET_SCHEDULE",
     RECIEVED_SCHEDULE: "RECIEVED_SCHEDULE",
     GET_HISTORY: "GET_HISTORY",
-    RECIEVED_HISTORY: "RECIEVED_HISTORY"
+    RECIEVED_HISTORY: "RECIEVED_HISTORY",
+    STOP_SCHEDULE: "STOP_SCHEDULE",
+    SCHEDULE_STOPPED: "SCHEDULE_STOPPED"
   };
   
   export const sendMailAction = (rsp) => ({
@@ -21,10 +23,16 @@ export const ACTION_TYPES = {
     type: ACTION_TYPES.RECIEVED_SCHEDULE,
     payload: rsp,
   });
+
+  export const stopScheduleAction = (rsp) => ({
+    type: ACTION_TYPES.SCHEDULE_STOPPED,
+    payload: rsp,
+  });
   
   export default {
     sendMailAction,
     getScheduleAction,
-    getHistoryAction
+    getHistoryAction,
+    stopScheduleAction
   };
   

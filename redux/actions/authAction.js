@@ -4,7 +4,7 @@ export const ACTION_TYPES = {
     LOG_IN: "LOG_IN",
     LOGGED_IN:"LOGGED_IN",
     LOG_OUT:"LOG_OUT",
-    LOGGED_OUT:"LOGGED_OUT" 
+    LOGGED_OUT:"LOGGED_OUT", 
   };
   
   export const signUpAction = (rsp) => ({

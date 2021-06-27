@@ -3,7 +3,8 @@ import { ACTION_TYPES } from "../actions/mailAction";
 const initialState = {
     mailSentMsg: "",
     history: [],
-    schedule: []
+    schedule: [],
+    stopScheduleMsg: ""
 }
 
 export default (state = initialState, action) => {
@@ -17,6 +18,9 @@ export default (state = initialState, action) => {
         case ACTION_TYPES.RECIEVED_SCHEDULE:
             console.log(action)
             return {...state, schedule:action.payload};
+        case ACTION_TYPES.SCHEDULE_STOPPED:
+            console.log(action)
+            return {...state, stopScheduleMsg:action.payload};
         default:
             return state;
     }

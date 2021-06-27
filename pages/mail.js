@@ -97,7 +97,7 @@ export default function Mail() {
   };
 
   const [dailyDate, setDailyDate] = React.useState(
-    new Date("2014-08-18T21:11:54")
+    new Date()
   );
   const handleDailyDateChange = (date) => {
     setDailyDate(date);
@@ -150,21 +150,9 @@ export default function Mail() {
   //ONSEND HANDLER
   const onSend = () => {
     const data = {
-      // campaignName:camName,
-      // to: toEmails,
-      // cc: ccEmails,
-      // bcc: bccEmails,
       subject: subject,
       body: emailHtml,
       recurrence: schedule,
-      // timely: timely,
-      // onceDate: onceDate,
-      // dailyDate: dailyDate,
-      // weeklyDay: weeklyDay,
-      // weeklyTime: weeklyTime,
-      // monthlyDay: monthlyDay,
-      // monthlyTime: monthlyTime,
-      // yearlyDate: yearlyDate,
     };
 
     if (camName === "") {
@@ -172,50 +160,43 @@ export default function Mail() {
         (data["cc"] = ccEmails),
         (data["bcc"] = bccEmails);
     } else {
-      (data["to"] = []), (data["cc"] = []), (data["bcc"] = []);
+      data["campaignName"] = camName;
+      data["to"] = [];
+      data["cc"] = [];
+      data["bcc"] = [];
     }
 
     if (data.recurrence === "") {
       data["recurrence"] = null;
     } else {
       if (data.recurrence === "Once") {
-       
-          data['second']= onceDate.getSeconds();
-          data['hour']= onceDate.getHours();
-          data['minute']= onceDate.getMinutes();
-          data['dayOfMonth']= onceDate.getDate();
-          data['month']= onceDate.getMonth();
-        
+        data["second"] = onceDate.getSeconds();
+        data["hour"] = onceDate.getHours();
+        data["minute"] = onceDate.getMinutes();
+        data["dayOfMonth"] = onceDate.getDate();
+        data["month"] = onceDate.getMonth();
       } else if (data.recurrence === "Timely") {
-        data['second']= timely;
+        data["second"] = timely;
       } else if (data.recurrence === "Daily") {
-        
-        data['second']= dailyDate.getSeconds();
-        data['hour']= dailyDate.getHours();
-        data['minute']= dailyDate.getMinutes();
-       
+        data["second"] = dailyDate.getSeconds();
+        data["hour"] = dailyDate.getHours();
+        data["minute"] = dailyDate.getMinutes();
       } else if (data.recurrence === "Weekly") {
-        
-        data['second']= weeklyTime.getSeconds();
-        data['hour']= weeklyTime.getHours();
-        data['minute']= weeklyTime.getMinutes();
-        data['dayOfWeek']= weeklyDay;
-       
+        data["second"] = weeklyTime.getSeconds();
+        data["hour"] = weeklyTime.getHours();
+        data["minute"] = weeklyTime.getMinutes();
+        data["dayOfWeek"] = weeklyDay;
       } else if (data.recurrence === "Monthly") {
-        
-        data['second']= monthlyTime.getSeconds();
-        data['hour']= monthlyTime.getHours();
-        data['minute']= monthlyTime.getMinutes();
-        data['dayOfMonth']= monthlyDay;
-        
+        data["second"] = monthlyTime.getSeconds();
+        data["hour"] = monthlyTime.getHours();
+        data["minute"] = monthlyTime.getMinutes();
+        data["dayOfMonth"] = monthlyDay;
       } else if (data.recurrence === "Yearly") {
-        
-          data['second']= yearlyDate.getSeconds();
-          data['hour']= yearlyDate.getHours();
-          data['minute']= yearlyDate.getMinutes();
-          data['dayOfMonth']= yearlyDate.getDate();
-          data['month']= yearlyDate.getMonth();
-       
+        data["second"] = yearlyDate.getSeconds();
+        data["hour"] = yearlyDate.getHours();
+        data["minute"] = yearlyDate.getMinutes();
+        data["dayOfMonth"] = yearlyDate.getDate();
+        data["month"] = yearlyDate.getMonth();
       }
     }
 
