@@ -133,13 +133,13 @@ xl:text-bold"
                         <MultiEmail
                           email={ccEmails}
                           handler={changeCcEmails}
-                          placeholder="To"
+                          placeholder="Cc"
                         />
                         <br />
                         <MultiEmail
                           email={bccEmails}
                           handler={changeBccEmails}
-                          placeholder="To"
+                          placeholder="Bcc"
                         />
                       </div>
                       <div className="mt-10">
