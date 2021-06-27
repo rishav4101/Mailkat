@@ -76,14 +76,13 @@ export default function PersistentDrawerLeft({ children }) {
             noWrap
             style={{ display: "flex", alignItems: "center" }}
           >
-            <a href="/">
-              {" "}
+            <Link href="/">
               <img
                 alt="."
                 src="/logo2.png"
                 style={{ height: "55px", width: "auto", cursor: "pointer" }}
               />
-            </a>
+            </Link>
             {/* &nbsp;MailKat */}
           </Typography>
         </Toolbar>
@@ -99,7 +98,7 @@ export default function PersistentDrawerLeft({ children }) {
       >
         <div className={classes.drawerHeader}>
           <ListItemText>
-            <b className="uppercase text-xl ml-5 text-primary">Page Title</b>
+            {/* <b className="uppercase text-xl ml-5 text-primary">Page Title</b> */}
           </ListItemText>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
@@ -118,14 +117,14 @@ export default function PersistentDrawerLeft({ children }) {
             </ListItem>
           </Link>
 
-          {fetchedToken === "" || !fetchedToken ? 
-         ( <>
-          <Link href="/login">
-          <ListItem className="hover:text-secondary hover:bg-fadedOrange cursor-pointer">
-            <PowerSettingsNewIcon className="m-2.5"/>
-              <ListItemText >Login</ListItemText>
-            </ListItem>
-            </Link>
+          {fetchedToken === "" || !fetchedToken ? (
+            <>
+              <Link href="/login">
+                <ListItem className="hover:text-secondary hover:bg-fadedOrange cursor-pointer">
+                  <PowerSettingsNewIcon className="m-2.5" />
+                  <ListItemText>Login</ListItemText>
+                </ListItem>
+              </Link>
 
               <Link href="/signup">
                 <ListItem className="hover:text-secondary hover:bg-fadedOrange cursor-pointer">

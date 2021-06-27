@@ -31,6 +31,7 @@ export default function Home() {
     { id: "Subject", label: "Subject" },
     { id: "Recurrance", label: "Recurrance" },
     { id: "Schedule Time", label: "Schedule Time" },
+    { id: "Stop Schedule", label: "Stop Schedule" },
   ];
   return (
     <div className={styles.container}>
@@ -129,6 +130,19 @@ export default function Home() {
                       </TableCell>
                       <TableCell className={classes.TableCell} align="center">
                         {his.nextMailTime}
+                      </TableCell>
+                      <TableCell className={classes.TableCell} align="center">
+                        {his.task_id ? <Button
+                variant="contained"
+                size="large"
+                color="primary"
+                className="m-10"
+                onClick={() => {
+                  dispatch({ type: ACTION_TYPES.STOP_SCHEDULE });
+                }}
+              >
+                Stop
+              </Button> :<>NON-RECURRENT</>}
                       </TableCell>
                     </TableRow>
                   ))) : <></>}

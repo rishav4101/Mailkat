@@ -233,7 +233,7 @@ export default function Mail() {
                       <em>None</em>
                     </MenuItem>
                     {fetchedCampaignNames.map((cm) => (
-                      <MenuItem value={cm}>{cm}</MenuItem>
+                      <MenuItem key={cm} value={cm}>{cm}</MenuItem>
                     ))}
                   </Select>
                 </FormControl>

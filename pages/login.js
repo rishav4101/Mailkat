@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { ACTION_TYPES } from "../redux/actions/authAction";
 import GLogin from "../components/GoogleLogin";
+import Link from "next/link";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -66,9 +67,9 @@ export default function Login() {
                             setData({ ...data, username: e.target.value });
                             console.log(data);
                           }}
-                        ></input>{" "}
+                        ></input>&nbsp;
                       </div>
-                      <div className="mt-8">
+                      <div className="mt-4">
                         <div className="flex justify-between items-center">
                           <div className="text-sm font-bold text-gray-700 tracking-wide">
                             Password
@@ -83,9 +84,9 @@ export default function Login() {
                             setData({ ...data, password: e.target.value });
                             console.log(data);
                           }}
-                        ></input>{" "}
+                        ></input>&nbsp;
                       </div>
-                      <div className="mt-10">
+                      <div className="mt-4">
                         <div className="flex justify-center items-center lg:items-end lg:text-right mx-auto lg:mx-0">
                           <Button
                             variant="contained"
@@ -104,20 +105,20 @@ export default function Login() {
                         </div>
                       </div>
                     </form>
-                    <div className="my-12 text-base text-center" style={{}}>
-                      Or Log In with Google
+                    <div className="my-4 text-base text-center" style={{}}>
+                      Or
                     </div>
                     {/* Google signup  */}
                     <GLogin text="Login with google" />
-                    <div className="mt-12 text-sm font-display font-semibold text-gray-700 text-center">
-                      Don't have an account ?&nbsp;
-                      <a
+                    <div className="mt-4 text-sm font-display font-semibold text-gray-700 text-center">
+                      Dont have an account ? &nbsp;
+                      <Link
                         className="cursor-pointer text-indigo-600 hover:text-indigo-800"
                         style={{ color: "red", fontWeight: "bold" }}
                         href="./signup"
                       >
                         Sign up
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
