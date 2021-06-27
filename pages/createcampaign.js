@@ -5,10 +5,13 @@ import MultiEmail from "../components/MultiEmail";
 import TextField from "@material-ui/core/TextField";
 import { useDispatch, useSelector } from "react-redux";
 import { ACTION_TYPES } from "../redux/actions/campaignAction";
+import Floating from "../components/Floating";
 
 export default function Createcampaign() {
   const dispatch = useDispatch();
-  const createdCampaign = useSelector((state) => state.campaign.createCampaignMsg);
+  const createdCampaign = useSelector(
+    (state) => state.campaign.createCampaignMsg
+  );
 
   // const [toEmails, setToEmails] = React.useState([]);
   //EMAILS
@@ -19,11 +22,11 @@ export default function Createcampaign() {
   const [ccEmails, setCcEmails] = React.useState([]);
   const changeCcEmails = (emails) => {
     setCcEmails(emails);
-  }
+  };
   const [bccEmails, setBccEmails] = React.useState([]);
   const changeBccEmails = (emails) => {
     setBccEmails(emails);
-  }
+  };
 
   //Campaign
   const [campaign, setCampaign] = React.useState("");
@@ -32,7 +35,6 @@ export default function Createcampaign() {
   };
 
   //ALL FORM DATA HANDLER
-  
 
   //ONSEND HANDLER
   const onsend = async () => {
@@ -40,11 +42,11 @@ export default function Createcampaign() {
       to: toEmails,
       cc: ccEmails,
       bcc: bccEmails,
-      campaignName: campaign
+      campaignName: campaign,
     };
 
     console.log(data);
-    dispatch({type:ACTION_TYPES.CREATE_CAMPAIGN, payload: data});
+    dispatch({ type: ACTION_TYPES.CREATE_CAMPAIGN, payload: data });
     console.log(createdCampaign);
 
     setToEmails([]);
@@ -52,7 +54,6 @@ export default function Createcampaign() {
     setBccEmails([]);
     setCampaign("");
   };
-
 
   return (
     <div>
@@ -121,13 +122,13 @@ xl:text-bold"
                           handler={changeToEmails}
                           placeholder="To"
                         />
-                        <br/>
+                        <br />
                         <MultiEmail
                           email={ccEmails}
                           handler={changeCcEmails}
                           placeholder="To"
                         />
-                        <br/>
+                        <br />
                         <MultiEmail
                           email={bccEmails}
                           handler={changeBccEmails}
@@ -142,6 +143,11 @@ xl:text-bold"
                             color="primary"
                             className="m-10"
                             onClick={onsend}
+                            style={{
+                              width: "320px",
+                              height: "56.3px",
+                              fontWeight: "bold",
+                            }}
                           >
                             Create
                           </Button>
@@ -153,6 +159,7 @@ xl:text-bold"
               </div>
             </div>
           </div>
+          <Floating />
         </Layout>
       </main>
     </div>
