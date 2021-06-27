@@ -73,8 +73,8 @@ export default function Home() {
               <h1 className="text-2xl lg:text-4xl ">
                 Start now by creating a new campaign.
               </h1>
-              <h2 className="text-lg lg:text-xl ">
-                You can create a campaign to send mails to mutiple audience, schedule it recurrence or for once and reuse the campaign audience. 
+              <h2 className="text-lg lg:text-xl max-w-lg">
+                Create. Schedule. Reuse.
               </h2>
             </div>
             <div className="flex justify-center items-center lg:items-end lg:text-right mx-auto lg:mx-0">

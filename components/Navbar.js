@@ -26,8 +26,10 @@ import { useNavbarStyles } from "./Styles";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { ACTION_TYPES } from "../redux/actions/authAction";
+import { useRouter } from "next/router";
 
 export default function PersistentDrawerLeft({ children }) {
+  const router = useRouter();
   const dispatch = useDispatch();
   const fetchedToken = useSelector((state) => state.auth.token);
   const matches = useMediaQuery("(max-width: 920px)");
@@ -166,6 +168,7 @@ export default function PersistentDrawerLeft({ children }) {
                 onClick={() => {
                   console.log("logout init");
                   dispatch({ type: ACTION_TYPES.LOG_OUT });
+                  router.push("/login");
                 }}
                 className="hover:text-secondary hover:bg-fadedOrange cursor-pointer"
               >
