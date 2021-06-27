@@ -111,9 +111,9 @@ export default function Login() {
                       Or
                     </div>
                     {/* Google signup  */}
-                    <GLogin text="Login with google" />
+                    <GLogin text="Login with Google" />
                     <div className="mt-4 text-sm font-display font-semibold text-gray-700 text-center">
-                      Dont have an account ? &nbsp;
+                      Don't have an account ? &nbsp;
                       <Link
                         className="cursor-pointer text-indigo-600 hover:text-indigo-800"
                         style={{ color: "red", fontWeight: "bold" }}
