@@ -7,6 +7,7 @@ import { ACTION_TYPES } from "../redux/actions/authAction";
 import GLogin from "../components/GoogleLogin";
 import Image from "next/image";
 import pic from "../public/signup.svg";
+import Link from "next/link";
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -132,13 +133,13 @@ export default function Signup() {
                     <GLogin text="Login with google" />
                     <div className="mt-4 text-sm font-display font-semibold text-gray-700 text-center">
                       Already have an account ?{" "}
-                      <a
+                      <Link
                         className="cursor-pointer text-indigo-600 hover:text-indigo-800"
                         style={{ color: "red", fontWeight: "bold" }}
                         href="./login"
                       >
                         Log In
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -148,11 +149,7 @@ export default function Signup() {
                 style={{ height: "auto" }}
               >
                 <div className="max-w-xs transform duration-200 hover:scale-110 cursor-pointer">
-                  <Image
-                    src={pic}
-                    alt="."
-                   
-                  />
+                  <Image src={pic} alt="." />
                 </div>
               </div>
             </div>
