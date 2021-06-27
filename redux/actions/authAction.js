@@ -5,6 +5,8 @@ export const ACTION_TYPES = {
     LOGGED_IN:"LOGGED_IN",
     LOG_OUT:"LOG_OUT",
     LOGGED_OUT:"LOGGED_OUT", 
+    G_LOG_IN: "G_LOG_IN",
+    G_LOGGED_IN: "G_LOGGED_IN",
   };
   
   export const signUpAction = (rsp) => ({
@@ -23,6 +25,14 @@ export const ACTION_TYPES = {
     },
   });
 
+  export const gLogInAction = (rsp) => ({
+    type: ACTION_TYPES.LOGGED_IN,
+    payload: {
+        msg: rsp.message,
+        tkn: rsp.token
+    },
+  });
+
   export const logOutAction = () => ({
     type: ACTION_TYPES.LOGGED_OUT,
     payload: {}
@@ -31,5 +41,6 @@ export const ACTION_TYPES = {
   export default {
     signUpAction,
     logInAction,
-    logOutAction
+    logOutAction,
+    gLogInAction
   };

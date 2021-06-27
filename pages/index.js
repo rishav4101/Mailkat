@@ -14,32 +14,30 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { useTableStyles } from "../components/Styles";
 import Floating from "../components/Floating";
+import Link from "next/link";
 
 export default function Home() {
   const dispatch = useDispatch();
   const fetchedSchedule = useSelector((state) => state.mail.schedule);
   const classes = useTableStyles();
 
-  // React.useEffect(() => {
-  //   dispatch({type:ACTION_TYPES.GET_SCHEDULE})
-  //   console.log(fetchedSchedule)
-  // }, []);
+  React.useEffect(() => {
+    dispatch({ type: ACTION_TYPES.GET_SCHEDULE });
+    console.log(fetchedSchedule);
+  }, []);
 
   const columns = [
-    { id: "id", label: "Universal ID", minWidth: 170 },
-    { id: "mname", label: "Manfacturer", minWidth: 170 },
-    { id: "mdate", label: "Date", minWidth: 170 },
-    { id: "pname", label: "Product Name", minWidth: 170 },
-    { id: "price", label: "Price", minWidth: 170 },
-    { id: "owner", label: "Owner", minWidth: 170 },
-    { id: "lastAction", label: "Last Action", minWidth: 170 },
+    { id: "To", label: "To" },
+    { id: "Subject", label: "Subject" },
+    { id: "Recurrance", label: "Recurrance" },
+    { id: "Schedule Time", label: "Schedule Time" },
   ];
   return (
     <div className={styles.container}>
       <Head>
         <title>Mailkat</title>
         <meta name="description" content="Mailkat official website" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta charset="utf-8" />
         <link rel="icon" href="/favicon.ico" />
         <link
@@ -78,14 +76,16 @@ export default function Home() {
               </h2>
             </div>
             <div className="flex justify-center items-center lg:items-end lg:text-right mx-auto lg:mx-0">
+              <Link href="/createcampaign">
               <Button
                 variant="contained"
                 size="large"
                 color="primary"
                 className="m-10"
               >
-                Create Email
+                Create Campaign
               </Button>
+              </Link>
             </div>
           </div>
           {/* {fetchedCountries?.map((c) => (
@@ -95,7 +95,7 @@ export default function Home() {
           <Paper className={classes.TableRoot2}>
             <TableContainer className={classes.TableContainer}>
               <Table stickyHeader aria-label="sticky table">
-                {/* <TableHead>
+                <TableHead>
                   <TableRow>
                     {columns.map((column) => (
                       <TableCell
@@ -108,31 +108,29 @@ export default function Home() {
                       </TableCell>
                     ))}
                   </TableRow>
-                </TableHead> */}
+                </TableHead>
                 <TableBody>
-                  <TableRow hover role="checkbox" tabIndex={-1}>
-                    <TableCell className={classes.TableCell} align="center">
-                      first
-                    </TableCell>
-                    <TableCell className={classes.TableCell} align="center">
-                      first
-                    </TableCell>
-                    <TableCell className={classes.TableCell} align="center">
-                      first
-                    </TableCell>
-                    <TableCell className={classes.TableCell} align="center">
-                      first
-                    </TableCell>
-                    <TableCell className={classes.TableCell} align="center">
-                      first
-                    </TableCell>
-                    <TableCell className={classes.TableCell} align="center">
-                      first
-                    </TableCell>
-                    <TableCell className={classes.TableCell} align="center">
-                      first
-                    </TableCell>
-                  </TableRow>
+                  {fetchedSchedule.map((his) => (
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={his.nextMailTime}
+                    >
+                      <TableCell className={classes.TableCell} align="center">
+                        {his.to.length > 1 ? (his.to[0] + ", " + his.to[1].slice(0,10) + "...") : (his.to[0]) }
+                      </TableCell>
+                      <TableCell className={classes.TableCell} align="center">
+                        {his.subject}
+                      </TableCell>
+                      <TableCell className={classes.TableCell} align="center">
+                        {his.recurrence}
+                      </TableCell>
+                      <TableCell className={classes.TableCell} align="center">
+                        {his.nextMailTime}
+                      </TableCell>
+                    </TableRow>
+                  ))}
                 </TableBody>
               </Table>
             </TableContainer>

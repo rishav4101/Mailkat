@@ -39,7 +39,7 @@ function* getHistory() {
       },
     }
   );
-  const resp = respData.json();
+  const resp = yield respData.json();
   console.log(resp);
   yield put(getHistoryAction(resp));
 }
@@ -47,7 +47,7 @@ function* getHistory() {
 function* getSchedule() {
   const tkn = yield select((state) => state.auth.token);
   const respData = yield fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/mail/schedule`,
+    `${process.env.NEXT_PUBLIC_API_URL}/mail/scheduled`,
     {
       method: "GET",
       headers: {
@@ -57,7 +57,7 @@ function* getSchedule() {
       },
     }
   );
-  const resp = respData.json();
+  const resp = yield respData.json();
   console.log(resp);
   yield put(getScheduleAction(resp));
 }
@@ -75,7 +75,7 @@ function* stopSchedule(action) {
       },
     }
   );
-  const resp = respData.json();
+  const resp = yield respData.json();
   console.log(resp);
   yield put(stopScheduleAction(resp.message));
 }

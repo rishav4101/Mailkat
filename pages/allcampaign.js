@@ -67,7 +67,7 @@ export default function Allcampaign() {
                         style={{ width: "50%", fontWeight: "bold" }}
                         align="center"
                       >
-                        {cam.to.map((em) => em + " ")}
+                        {cam.to.length > 1 ? (cam.to[0] + ", " + cam.to[1].slice(0,10) + "...") : (cam.to[0]) }
                       </TableCell>
                     </TableRow>
                   </>

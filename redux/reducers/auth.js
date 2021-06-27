@@ -14,6 +14,9 @@ export default (state = initialState, action) => {
         case ACTION_TYPES.LOGGED_IN:
             console.log(action)
             return {...state, logInMsg:action.payload.msg, token:action.payload.tkn};
+        case ACTION_TYPES.G_LOGGED_IN:
+            console.log(action)
+            return {...state, logInMsg:action.payload.msg, token:action.payload.tkn};
         case ACTION_TYPES.LOGGED_OUT:
             return {...state, token:"" };
         default:

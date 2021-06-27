@@ -20,7 +20,7 @@ export const ACTION_TYPES = {
   });
 
   export const getHistoryAction = (rsp) => ({
-    type: ACTION_TYPES.RECIEVED_SCHEDULE,
+    type: ACTION_TYPES.RECIEVED_HISTORY,
     payload: rsp,
   });
 

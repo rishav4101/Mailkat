@@ -17,19 +17,17 @@ export default function History() {
   const classes = useTableStyles();
 
   const fetchedHistory = useSelector((state) => state.mail.history);
-  // React.useEffect(() => {
-  //   dispatch({ type: ACTION_TYPES.GET_HISTORY });
-  //   console.log(fetchedHistory);
-  // }, []);
+  React.useEffect(() => {
+    console.log("here");
+    dispatch({ type: ACTION_TYPES.GET_HISTORY });
+    console.log(fetchedHistory);
+  }, []);
 
   const columns = [
-    { id: "id", label: "Universal ID", minWidth: 170 },
-    { id: "mname", label: "Manfacturer", minWidth: 170 },
-    { id: "mdate", label: "Date", minWidth: 170 },
-    { id: "pname", label: "Product Name", minWidth: 170 },
-    { id: "price", label: "Price", minWidth: 170 },
-    { id: "owner", label: "Owner", minWidth: 170 },
-    { id: "lastAction", label: "Last Action", minWidth: 170 },
+    { id: "To", label: "To" },
+    { id: "Subject", label: "Subject" },
+    { id: "Recurrance", label: "Recurrance" },
+    { id: "Time", label: "Time" },
   ];
   return (
     <Layout>
@@ -51,29 +49,27 @@ export default function History() {
               </TableRow>
             </TableHead>
             <TableBody>
-              <TableRow hover role="checkbox" tabIndex={-1}>
-                <TableCell className={classes.TableCell} align="center">
-                  first
-                </TableCell>
-                <TableCell className={classes.TableCell} align="center">
-                  first
-                </TableCell>
-                <TableCell className={classes.TableCell} align="center">
-                  first
-                </TableCell>
-                <TableCell className={classes.TableCell} align="center">
-                  first
-                </TableCell>
-                <TableCell className={classes.TableCell} align="center">
-                  first
-                </TableCell>
-                <TableCell className={classes.TableCell} align="center">
-                  first
-                </TableCell>
-                <TableCell className={classes.TableCell} align="center">
-                  first
-                </TableCell>
-              </TableRow>
+              {fetchedHistory.map((his) => (
+                <TableRow
+                  hover
+                  role="checkbox"
+                  tabIndex={-1}
+                  key={his.lastSent}
+                >
+                  <TableCell className={classes.TableCell} align="center">
+                  {his.to.length > 1 ? (his.to[0] + ", " + his.to[1].slice(0,10) + "...") : (his.to[0]) }
+                  </TableCell>
+                  <TableCell className={classes.TableCell} align="center">
+                    {his.subject}
+                  </TableCell>
+                  <TableCell className={classes.TableCell} align="center">
+                    {his.recurrence}
+                  </TableCell>
+                  <TableCell className={classes.TableCell} align="center">
+                    {his.lastSent}
+                  </TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </TableContainer>
