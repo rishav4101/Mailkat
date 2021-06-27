@@ -23,6 +23,8 @@ export default function Allcampaign() {
     console.log(getCampaign);
   }, []);
 
+  
+
   const classes = useTableStyles();
   const columns = [
     // { id: "id", label: "Universal ID", minWidth: 170 },

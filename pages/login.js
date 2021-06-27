@@ -8,20 +8,23 @@ import GLogin from "../components/GoogleLogin";
 import Link from "next/link";
 import Image from "next/image";
 import pic from "../public/Login.svg";
+import { delay } from "@redux-saga/core/effects";
 
 export default function Login() {
   const dispatch = useDispatch();
   const router = useRouter();
   const fetchedLogIn = useSelector((state) => state.auth.logInMsg);
   const fetchedToken = useSelector((state) => state.auth.token);
-  const [data, setData] = React.useState({
+  const [msg, setMsg] = React.useState("");
+   const [data, setData] = React.useState({
     username: "",
     password: "",
   });
 
   const sign = () => {
     dispatch({ type: ACTION_TYPES.LOG_IN, payload: data });
-    console.log(fetchedLogIn);
+    delay(300)
+    setMsg(fetchedLogIn);
     if (fetchedToken !== "" && fetchedToken) router.push("/");
   };
 
@@ -54,6 +57,7 @@ export default function Login() {
                   >
                     Log In
                   </h2>
+                  {msg === undefined ? <h5 className="text-primary mx-auto mt-3 text-center w-full">Error Occured</h5> : <></>}
                   <div className="mt-12">
                     <form>
                       <div>

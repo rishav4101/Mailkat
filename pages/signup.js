@@ -13,6 +13,7 @@ export default function Signup() {
   const router = useRouter();
   const fetchedSignUp = useSelector((state) => state.auth.signUpMsg);
   const fetchedToken = useSelector((state) => state.auth.token);
+  const [msg, setMsg] = React.useState("");
 
   const [data, setData] = React.useState({
     email: "",
@@ -22,6 +23,8 @@ export default function Signup() {
 
   const sign = () => {
     dispatch({ type: ACTION_TYPES.SIGN_UP, payload: data });
+    delay(300)
+    setMsg(fetchedSignUp);
     console.log(fetchedSignUp);
     if (fetchedToken !== "" && fetchedToken) router.push("/");
   };
@@ -55,6 +58,7 @@ export default function Signup() {
                   >
                     Sign Up
                   </h2>
+                  {msg === undefined ? <h5 className="text-primary mx-auto mt-3 text-center w-full">Error Occured</h5> : <></>}
                   <div className="mt-12">
                     <form>
                       <div>

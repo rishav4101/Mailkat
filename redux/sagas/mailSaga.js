@@ -63,6 +63,7 @@ function* getSchedule() {
 }
 
 function* stopSchedule(action) {
+   console.log("hi")
   const tkn = yield select((state) => state.auth.token);
   const respData = yield fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/mail/stopSchedule?taskNumber=${action.payload}`,

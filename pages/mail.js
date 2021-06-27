@@ -13,7 +13,7 @@ import {
   KeyboardTimePicker,
   KeyboardDateTimePicker,
 } from "@material-ui/pickers";
-
+import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { ACTION_TYPES as ac1 } from "../redux/actions/campaignAction";
 import { ACTION_TYPES as ac2 } from "../redux/actions/mailAction";
@@ -30,16 +30,22 @@ const plugins = dynamic(() => import("suneditor/src/plugins"), {
 });
 
 export default function Mail() {
+  const router = useRouter();
   const dispatch = useDispatch();
   const fetchedCampaignNames = useSelector(
     (state) => state.campaign.campaignNames
   );
+  const fetchedToken = useSelector((state) => state.auth.token);
 
   React.useEffect(() => {
+    if (fetchedToken === "" || !fetchedToken) router.push("/");
     dispatch({ type: ac1.GET_CAMPAIGN_NAMES });
     console.log(fetchedCampaignNames);
   }, []);
-
+  React.useEffect(() => {
+    if (fetchedToken === "" || !fetchedToken) router.push("/");
+  });
+  
   const editor = React.useRef();
 
   // The sunEditor parameter will be set to the core suneditor instance when this function is called
@@ -232,9 +238,10 @@ export default function Mail() {
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    {fetchedCampaignNames.map((cm) => (
+                    {Array.isArray(fetchedCampaignNames) ?
+                    (fetchedCampaignNames.map((cm) => (
                       <MenuItem key={cm} value={cm}>{cm}</MenuItem>
-                    ))}
+                    ))) : <></>}
                   </Select>
                 </FormControl>
               </div>

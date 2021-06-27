@@ -151,13 +151,13 @@ export default function Home() {
                         {his.nextMailTime}
                       </TableCell>
                       <TableCell className={classes.TableCell} align="center">
-                        {his.task_id ? <Button
+                        {his.task_id !== undefined ? <Button
                 variant="contained"
                 size="large"
                 color="primary"
                 className="m-10"
                 onClick={() => {
-                  dispatch({ type: ACTION_TYPES.STOP_SCHEDULE });
+                  dispatch({ type: ACTION_TYPES.STOP_SCHEDULE, payload:his.task_id });
                 }}
               >
                 Stop

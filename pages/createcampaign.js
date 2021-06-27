@@ -15,6 +15,10 @@ export default function Createcampaign() {
     (state) => state.campaign.createCampaignMsg
   );
 
+  const fetchedToken = useSelector((state) => state.auth.token);
+
+
+
   // const [toEmails, setToEmails] = React.useState([]);
   //EMAILS
   const [toEmails, setToEmails] = React.useState([]);
