@@ -33,6 +33,7 @@ export default function Home() {
     { id: "Subject", label: "Subject" },
     { id: "Recurrance", label: "Recurrance" },
     { id: "Schedule Time", label: "Schedule Time" },
+    { id: "Stop Schedule", label: "Stop Schedule" },
   ];
   return (
     <div className={styles.container}>
@@ -129,33 +130,41 @@ export default function Home() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {Array.isArray(fetchedSchedule) ? (
-                    fetchedSchedule.map((his) => (
-                      <TableRow
-                        hover
-                        role="checkbox"
-                        tabIndex={-1}
-                        key={his.nextMailTime}
-                      >
-                        <TableCell className={classes.TableCell} align="center">
-                          {his.to.length > 1
-                            ? his.to[0] + ", " + his.to[1].slice(0, 10) + "..."
-                            : his.to[0]}
-                        </TableCell>
-                        <TableCell className={classes.TableCell} align="center">
-                          {his.subject}
-                        </TableCell>
-                        <TableCell className={classes.TableCell} align="center">
-                          {his.recurrence}
-                        </TableCell>
-                        <TableCell className={classes.TableCell} align="center">
-                          {his.nextMailTime}
-                        </TableCell>
-                      </TableRow>
-                    ))
-                  ) : (
-                    <></>
-                  )}
+                  {Array.isArray(fetchedSchedule) ?
+                  (fetchedSchedule.map((his) => (
+                    <TableRow
+                      hover
+                      role="checkbox"
+                      tabIndex={-1}
+                      key={his.nextMailTime}
+                    >
+                      <TableCell className={classes.TableCell} align="center">
+                        {his.to.length > 1 ? (his.to[0] + ", " + his.to[1].slice(0,10) + "...") : (his.to[0]) }
+                      </TableCell>
+                      <TableCell className={classes.TableCell} align="center">
+                        {his.subject}
+                      </TableCell>
+                      <TableCell className={classes.TableCell} align="center">
+                        {his.recurrence}
+                      </TableCell>
+                      <TableCell className={classes.TableCell} align="center">
+                        {his.nextMailTime}
+                      </TableCell>
+                      <TableCell className={classes.TableCell} align="center">
+                        {his.task_id ? <Button
+                variant="contained"
+                size="large"
+                color="primary"
+                className="m-10"
+                onClick={() => {
+                  dispatch({ type: ACTION_TYPES.STOP_SCHEDULE });
+                }}
+              >
+                Stop
+              </Button> :<>NON-RECURRENT</>}
+                      </TableCell>
+                    </TableRow>
+                  ))) : <></>}
                 </TableBody>
               </Table>
             </TableContainer>

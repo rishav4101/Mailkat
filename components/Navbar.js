@@ -78,16 +78,9 @@ export default function PersistentDrawerLeft({ children }) {
             noWrap
             style={{ display: "flex", alignItems: "center" }}
           >
-            <a href="/">
-              {" "}
+            <Link href="/">
               <Image src={pic} alt="." width={115.2} height={49.5} />
-              {/* <img
-                alt="."
-                src="/logo2.png"
-                style={{ height: "55px", width: "auto", cursor: "pointer" }}
-              /> */}
-            </a>
-            {/* &nbsp;MailKat */}
+            </Link>
           </Typography>
         </Toolbar>
       </AppBar>
@@ -102,7 +95,7 @@ export default function PersistentDrawerLeft({ children }) {
       >
         <div className={classes.drawerHeader}>
           <ListItemText>
-            <b className="uppercase text-xl ml-5 text-primary">Page Title</b>
+            {/* <b className="uppercase text-xl ml-5 text-primary">Page Title</b> */}
           </ListItemText>
           <IconButton onClick={handleDrawerClose}>
             {theme.direction === "ltr" ? (
