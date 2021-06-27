@@ -584,7 +584,6 @@ export default function Mail() {
                     <KeyboardDateTimePicker
                       label="Pick Date Time"
                       onError={console.log}
-                      minDate={new Date("2019-01-01T00:00")}
                       format="yyyy/MM/dd hh:mm a"
                       value={yearlyDate}
                       minDate={minDateThisYear}

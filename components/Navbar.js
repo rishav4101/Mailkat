@@ -27,6 +27,8 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { ACTION_TYPES } from "../redux/actions/authAction";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import pic from "../public/logo2.png";
 
 export default function PersistentDrawerLeft({ children }) {
   const router = useRouter();
@@ -77,13 +79,8 @@ export default function PersistentDrawerLeft({ children }) {
             style={{ display: "flex", alignItems: "center" }}
           >
             <Link href="/">
-              <img
-                alt="."
-                src="/logo2.png"
-                style={{ height: "55px", width: "auto", cursor: "pointer" }}
-              />
+              <Image src={pic} alt="." width={115.2} height={49.5} />
             </Link>
-            {/* &nbsp;MailKat */}
           </Typography>
         </Toolbar>
       </AppBar>

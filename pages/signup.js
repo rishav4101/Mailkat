@@ -5,6 +5,8 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { ACTION_TYPES } from "../redux/actions/authAction";
 import GLogin from "../components/GoogleLogin";
+import Image from "next/image";
+import pic from "../public/signup.svg";
 
 export default function Signup() {
   const dispatch = useDispatch();
@@ -19,15 +21,13 @@ export default function Signup() {
   });
 
   const sign = () => {
-      dispatch({type: ACTION_TYPES.SIGN_UP, payload: data})
-      console.log(fetchedSignUp);
-      if(fetchedToken !== "" && fetchedToken)
-      router.push('/')
-  }
+    dispatch({ type: ACTION_TYPES.SIGN_UP, payload: data });
+    console.log(fetchedSignUp);
+    if (fetchedToken !== "" && fetchedToken) router.push("/");
+  };
 
   React.useEffect(() => {
-    if(fetchedToken !== "" && fetchedToken)
-      router.push('/')
+    if (fetchedToken !== "" && fetchedToken) router.push("/");
   });
 
   return (
@@ -148,14 +148,10 @@ export default function Signup() {
                 style={{ height: "auto" }}
               >
                 <div className="max-w-xs transform duration-200 hover:scale-110 cursor-pointer">
-                  <img
-                    style={{
-                      objectFit: "contain",
-                      maxWidth: "130%",
-                      height: "auto",
-                    }}
-                    src="./signup.svg"
+                  <Image
+                    src={pic}
                     alt="."
+                   
                   />
                 </div>
               </div>

@@ -15,6 +15,8 @@ import TableRow from "@material-ui/core/TableRow";
 import { useTableStyles } from "../components/Styles";
 import Floating from "../components/Floating";
 import Link from "next/link";
+import Image from "next/image";
+import pic from "../public/Graphic2.svg";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -59,11 +61,18 @@ export default function Home() {
               </h2>
             </div>
             <div className="flex flex-row justify-center items-center mx-auto">
-              <img
+              <Image
+                className="h-auto w-full max-w-md -mr-10"
+                src={pic}
+                alt="."
+                width={408}
+                height={268}
+              />
+              {/* <img
                 src="./Graphic2.svg"
                 alt="."
                 className="h-auto w-full max-w-md -mr-10"
-              />
+              /> */}
             </div>
           </div>
 
@@ -78,14 +87,14 @@ export default function Home() {
             </div>
             <div className="flex justify-center items-center lg:items-end lg:text-right mx-auto lg:mx-0">
               <Link href="/createcampaign">
-              <Button
-                variant="contained"
-                size="large"
-                color="primary"
-                className="m-10"
-              >
-                Create Campaign
-              </Button>
+                <Button
+                  variant="contained"
+                  size="large"
+                  color="primary"
+                  className="m-10"
+                >
+                  Create Campaign
+                </Button>
               </Link>
             </div>
           </div>

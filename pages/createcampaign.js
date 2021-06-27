@@ -6,6 +6,8 @@ import TextField from "@material-ui/core/TextField";
 import { useDispatch, useSelector } from "react-redux";
 import { ACTION_TYPES } from "../redux/actions/campaignAction";
 import Floating from "../components/Floating";
+import Image from "next/image";
+import pic from "../public/Login.svg";
 
 export default function Createcampaign() {
   const dispatch = useDispatch();
@@ -73,15 +75,16 @@ export default function Createcampaign() {
                 style={{ height: "auto" }}
               >
                 <div className="max-w-xs transform duration-200 hover:scale-110 cursor-pointer">
-                  <img
+                  <div
+                    className="h-auto w-full max-w-md -mr-10"
                     style={{
                       objectFit: "contain",
                       maxWidth: "120%",
                       height: "auto",
                     }}
-                    src="./Login.svg"
-                    alt="."
-                  />
+                  >
+                    <Image src={pic} alt="." />
+                  </div>
                 </div>
               </div>
               <div className="lg:w-1/2 xl:max-w-screen-sm">

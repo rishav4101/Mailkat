@@ -6,6 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { ACTION_TYPES } from "../redux/actions/authAction";
 import GLogin from "../components/GoogleLogin";
 import Link from "next/link";
+import Image from "next/image";
+import pic from "../public/Login.svg";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -128,15 +130,8 @@ export default function Login() {
                 style={{ height: "auto" }}
               >
                 <div className="max-w-xs transform duration-200 hover:scale-110 cursor-pointer">
-                  <img
-                    style={{
-                      objectFit: "contain",
-                      maxWidth: "120%",
-                      height: "auto",
-                    }}
-                    src="./Login.svg"
-                    alt="."
-                  />
+                <Image src={pic} alt="."  width={416} height={341.25}/>
+                
                 </div>
               </div>
             </div>
