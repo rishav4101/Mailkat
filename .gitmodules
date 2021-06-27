@@ -1,0 +1,3 @@
+[submodule "mailkat-backend"]
+	path = mailkat-backend
+	url = https://github.com/deadlycoder07/mailkat-backend
