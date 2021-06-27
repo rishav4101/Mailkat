@@ -1,11 +1,11 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& > *': {
+    "& > *": {
       margin: theme.spacing(1),
     },
   },
@@ -18,9 +18,19 @@ export default function Floating() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root} style={{position:"fixed", bottom:"40px", right:"40px"}}>
+    <div
+      className={classes.root}
+      style={{
+        zIndex: "999",
+        position: "fixed",
+        bottom: "40px",
+        right: "40px",
+      }}
+    >
       <Fab color="primary" aria-label="add">
-        <a href="./mail"><AddIcon /> </a>
+        <a href="./mail">
+          <AddIcon />{" "}
+        </a>
       </Fab>
     </div>
   );

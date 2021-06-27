@@ -100,7 +100,17 @@ export default function Home() {
           {/* {fetchedCountries?.map((c) => (
           <h1 key={c.name}>{c.name}</h1>
         ))} */}
-
+          <h3
+            className="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-centre xl:text-5xl
+                  xl:text-bold"
+            style={{
+              margin: "45px",
+              color: "#ff3d00",
+              fontWeight: "bold",
+            }}
+          >
+            Scheduled
+          </h3>
           <Paper className={classes.TableRoot2}>
             <TableContainer className={classes.TableContainer}>
               <Table stickyHeader aria-label="sticky table">

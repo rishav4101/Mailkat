@@ -32,6 +32,16 @@ export default function Allcampaign() {
 
   return (
     <Layout>
+      <h3
+    className="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-centre xl:text-5xl
+          xl:text-bold"
+    style={{
+      margin: "15px",
+      color: "#ff3d00",
+      
+    }}
+  >  All Campaigns
+  </h3>
       <Paper className={classes.TableRoot2}>
         <TableContainer className={classes.TableContainer}>
           <Table stickyHeader aria-label="sticky table">
