@@ -112,7 +112,7 @@ export default function Home() {
           >
             Scheduled
           </h3>
-          <Paper className={classes.TableRoot2}>
+          <Paper className={classes.TableRoot2} style={{ width: "95%" }}>
             <TableContainer className={classes.TableContainer}>
               <Table stickyHeader aria-label="sticky table">
                 <TableHead>
