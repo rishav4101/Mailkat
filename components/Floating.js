@@ -23,13 +23,13 @@ export default function Floating() {
       style={{
         zIndex: "999",
         position: "fixed",
-        bottom: "40px",
-        right: "40px",
+        bottom: "15px",
+        right: "15px",
       }}
     >
       <Fab color="primary" aria-label="add">
         <a href="./mail">
-          <AddIcon />{" "}
+          <AddIcon />
         </a>
       </Fab>
     </div>

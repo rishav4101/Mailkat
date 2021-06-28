@@ -25,7 +25,7 @@ export default function Createcampaign() {
 
   React.useEffect(() => {
     if (fetchedToken === "" || !fetchedToken) router.push("/");
-  })
+  });
 
   // const [toEmails, setToEmails] = React.useState([]);
   //EMAILS
@@ -112,19 +112,23 @@ xl:text-bold"
                     Create Campaign
                   </h2>
 
-                  {createdCampaignError ? 
-                  <Alert severity="error" className="max-w-lg mx-auto my-5">
-                  <AlertTitle>Error</AlertTitle>
-                  <strong>{createdCampaignError}</strong>
-                </Alert> 
-                 :<></>}
+                  {createdCampaignError ? (
+                    <Alert severity="error" className="max-w-lg mx-auto my-5">
+                      <AlertTitle>Error</AlertTitle>
+                      <strong>{createdCampaignError}</strong>
+                    </Alert>
+                  ) : (
+                    <></>
+                  )}
 
-            {createdCampaignMsg ? 
-                  <Alert severity="success" className="max-w-lg mx-auto my-5">
-                  <AlertTitle>Successful</AlertTitle>
-                  <strong>{createdCampaignMsg}</strong>
-                </Alert> 
-                 :<></>}
+                  {createdCampaignMsg ? (
+                    <Alert severity="success" className="max-w-lg mx-auto my-5">
+                      <AlertTitle>Successful</AlertTitle>
+                      <strong>{createdCampaignMsg}</strong>
+                    </Alert>
+                  ) : (
+                    <></>
+                  )}
 
                   <div className="mt-12">
                     <form>
@@ -133,7 +137,7 @@ xl:text-bold"
                           Campaign Name
                         </div>
                         <TextField
-                        required
+                          required
                           className="w-full"
                           id="outlined-basic"
                           placeholder="Enter Campaign Name"
@@ -149,7 +153,7 @@ xl:text-bold"
                           </div>
                         </div>
                         <MultiEmail
-                        required
+                          required
                           email={toEmails}
                           handler={changeToEmails}
                           placeholder="To"

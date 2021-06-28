@@ -31,8 +31,8 @@ export default function Allcampaign() {
 
   React.useEffect(() => {
     if (fetchedToken === "" || !fetchedToken) router.push("/");
-  })
-  
+  });
+
   const classes = useTableStyles();
   const columns = [
     { id: "mname", label: "Campaign Name", minWidth: 170 },
@@ -42,79 +42,84 @@ export default function Allcampaign() {
   return (
     <Layout>
       {fetchedError ? (
-            <Alert severity="error" className="max-w-lg mx-auto my-5">
-              <AlertTitle>Error</AlertTitle>
-              <strong>{fetchedError}</strong>
-            </Alert>
-          ) : (
-            <>
-      <h3
-    className="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-centre xl:text-5xl
+        <Alert severity="error" className="max-w-lg mx-auto my-5">
+          <AlertTitle>Error</AlertTitle>
+          <strong>{fetchedError}</strong>
+        </Alert>
+      ) : (
+        <>
+          <h3
+            className="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-centre xl:text-5xl
           xl:text-bold"
-    style={{
-      margin: "15px",
-      color: "#ff3d00",
-      
-    }}
-  >  All Campaigns
-  </h3>
-  {Array.isArray(getCampaign) && getCampaign.length>0 ?
-      <Paper className={classes.TableRoot2}>
-        <TableContainer className={classes.TableContainer}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align="center"
-                    className={classes.TableHead}
-                    style={{ width: "50%", fontWeight: "bold" }}
-                    // style={{ minWidth: column.minWidth }}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-            {Array.isArray(getCampaign) ?
-              (getCampaign.map((cam) => (
-             
-                  <>
-                    <TableRow hover role="checkbox" tabIndex={-1}>
-                      <TableCell
-                        className={classes.TableCell}
-                        style={{ width: "50%", fontWeight: "bold" }}
-                        align="center"
-                      >
-                        {cam.campaignName}
-                      </TableCell>
-                      <TableCell
-                        className={classes.TableCell}
-                        style={{ width: "50%", fontWeight: "bold" }}
-                        align="center"
-                      >
-                        {cam.to.length > 1 ? (cam.to[0] + ", " + cam.to[1].slice(0,10) + "...") : (cam.to[0]) }
-                      </TableCell>
+            style={{
+              margin: "15px",
+              color: "#ff3d00",
+            }}
+          >
+            {" "}
+            All Campaigns
+          </h3>
+          {Array.isArray(getCampaign) && getCampaign.length > 0 ? (
+            <Paper className={classes.TableRoot2}>
+              <TableContainer className={classes.TableContainer}>
+                <Table stickyHeader aria-label="sticky table">
+                  <TableHead>
+                    <TableRow>
+                      {columns.map((column) => (
+                        <TableCell
+                          key={column.id}
+                          align="center"
+                          className={classes.TableHead}
+                          style={{ width: "50%", fontWeight: "bold" }}
+                          // style={{ minWidth: column.minWidth }}
+                        >
+                          {column.label}
+                        </TableCell>
+                      ))}
                     </TableRow>
-                  </>
-                ))
-              ) : (
-                <></>
-              )}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
-      : 
-      <Alert severity="info" className="max-w-lg mx-auto my-5">
+                  </TableHead>
+                  <TableBody>
+                    {Array.isArray(getCampaign) ? (
+                      getCampaign.map((cam) => (
+                        <>
+                          <TableRow hover role="checkbox" tabIndex={-1}>
+                            <TableCell
+                              className={classes.TableCell}
+                              style={{ width: "50%", fontWeight: "bold" }}
+                              align="center"
+                            >
+                              {cam.campaignName}
+                            </TableCell>
+                            <TableCell
+                              className={classes.TableCell}
+                              style={{ width: "50%", fontWeight: "bold" }}
+                              align="center"
+                            >
+                              {cam.to.length > 1
+                                ? cam.to[0] +
+                                  ", " +
+                                  cam.to[1].slice(0, 10) +
+                                  "..."
+                                : cam.to[0]}
+                            </TableCell>
+                          </TableRow>
+                        </>
+                      ))
+                    ) : (
+                      <></>
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
+          ) : (
+            <Alert severity="info" className="max-w-lg mx-auto my-5">
               <AlertTitle>Info</AlertTitle>
               <strong>No Campaigns Created!</strong>
             </Alert>
-}
-</>
           )}
+        </>
+      )}
       <Floating />
     </Layout>
   );

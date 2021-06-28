@@ -22,19 +22,19 @@ export default function Signup() {
     email: "",
     username: "",
     password: "",
-    name:""
+    name: "",
   });
 
   const sign = () => {
-    console.log(data)
+    console.log(data);
     dispatch({ type: ACTION_TYPES.SIGN_UP, payload: data });
     // setMsg(fetchedSignUpMsg);
     setData({
       email: "",
       username: "",
       password: "",
-      name:""
-    })
+      name: "",
+    });
     console.log(fetchedSignUpMsg);
     if (fetchedToken !== "" && fetchedToken) router.push("/");
   };
@@ -68,41 +68,46 @@ export default function Signup() {
                   >
                     Sign Up
                   </h2>
-                  {fetchedSignUpError ? 
-                  <Alert severity="error" className="max-w-lg mx-auto my-5">
-              <AlertTitle>Error</AlertTitle>
-              <strong>{fetchedSignUpError}</strong>
-            </Alert> : <></>}
+                  {fetchedSignUpError ? (
+                    <Alert severity="error" className="max-w-lg mx-auto my-5">
+                      <AlertTitle>Error</AlertTitle>
+                      <strong>{fetchedSignUpError}</strong>
+                    </Alert>
+                  ) : (
+                    <></>
+                  )}
 
-            {fetchedSignUpMsg ? 
-                  <Alert severity="success" className="max-w-lg mx-auto my-5">
-              <AlertTitle>Successful</AlertTitle>
-              <strong>{fetchedSignUpMsg}</strong>
-            </Alert> : <></>}
+                  {fetchedSignUpMsg ? (
+                    <Alert severity="success" className="max-w-lg mx-auto my-5">
+                      <AlertTitle>Successful</AlertTitle>
+                      <strong>{fetchedSignUpMsg}</strong>
+                    </Alert>
+                  ) : (
+                    <></>
+                  )}
 
                   <div className="mt-12">
                     <form>
-                      
-                        <div className="mt-4 text-sm font-bold text-gray-700 tracking-wide">
-                          Name
-                        </div>
-                        <input
-                          required
-                          className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
-                          type=""
-                          placeholder="Enter your name"
-                          value={data.name}
-                          onChange={(e) => {
-                            setData({ ...data, name: e.target.value });
-                            console.log(data);
-                          }}
-                        ></input>
-                        <div>
+                      <div className="mt-4 text-sm font-bold text-gray-700 tracking-wide">
+                        Name
+                      </div>
+                      <input
+                        required
+                        className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+                        type=""
+                        placeholder="Enter your name"
+                        value={data.name}
+                        onChange={(e) => {
+                          setData({ ...data, name: e.target.value });
+                          console.log(data);
+                        }}
+                      ></input>
+                      <div>
                         <div className="mt-4 text-sm font-bold text-gray-700 tracking-wide">
                           Email Address
                         </div>
                         <input
-                        required
+                          required
                           className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                           type=""
                           placeholder="Enter your email address"
@@ -120,7 +125,7 @@ export default function Signup() {
                           </div>
                         </div>
                         <input
-                        required
+                          required
                           className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                           type=""
                           placeholder="Enter your username"

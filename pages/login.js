@@ -59,17 +59,23 @@ export default function Login() {
                     Log In
                   </h2>
 
-                  {fetchedLogInError ? 
-                  <Alert severity="error" className="max-w-lg mx-auto my-5">
-              <AlertTitle>Error</AlertTitle>
-              <strong>{fetchedLogInError}</strong>
-            </Alert> : <></>}
+                  {fetchedLogInError ? (
+                    <Alert severity="error" className="max-w-lg mx-auto my-5">
+                      <AlertTitle>Error</AlertTitle>
+                      <strong>{fetchedLogInError}</strong>
+                    </Alert>
+                  ) : (
+                    <></>
+                  )}
 
-            {fetchedLogInMsg ? 
-                  <Alert severity="success" className="max-w-lg mx-auto my-5">
-              <AlertTitle>Successful</AlertTitle>
-              <strong>{fetchedLogInMsg}</strong>
-            </Alert> : <></>}
+                  {fetchedLogInMsg ? (
+                    <Alert severity="success" className="max-w-lg mx-auto my-5">
+                      <AlertTitle>Successful</AlertTitle>
+                      <strong>{fetchedLogInMsg}</strong>
+                    </Alert>
+                  ) : (
+                    <></>
+                  )}
 
                   <div className="mt-12">
                     <form>
@@ -78,7 +84,7 @@ export default function Login() {
                           Email Address or Username
                         </div>
                         <input
-                        required
+                          required
                           className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                           type=""
                           placeholder="Enter email or username"
@@ -97,7 +103,7 @@ export default function Login() {
                           </div>
                         </div>
                         <input
-                        required
+                          required
                           className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                           type="password"
                           placeholder="Enter your password"

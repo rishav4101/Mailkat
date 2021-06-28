@@ -120,100 +120,103 @@ export default function Home() {
               >
                 Scheduled
               </h3>
-              {Array.isArray(fetchedSchedule) && fetchedSchedule.length>0 ? 
-              <Paper className={classes.TableRoot2}>
-                <TableContainer className={classes.TableContainer}>
-                  <Table stickyHeader aria-label="sticky table">
-                    <TableHead>
-                      <TableRow>
-                        {columns.map((column) => (
-                          <TableCell
-                            key={column.id}
-                            align="center"
-                            className={classes.TableHead}
-                            // style={{ minWidth: column.minWidth }}
-                          >
-                            {column.label}
-                          </TableCell>
-                        ))}
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {Array.isArray(fetchedSchedule) ? (
-                        fetchedSchedule.map((his) => (
-                          <TableRow
-                            hover
-                            role="checkbox"
-                            tabIndex={-1}
-                            key={his.nextMailTime}
-                          >
+              {Array.isArray(fetchedSchedule) && fetchedSchedule.length > 0 ? (
+                <Paper className={classes.TableRoot2}>
+                  <TableContainer className={classes.TableContainer}>
+                    <Table stickyHeader aria-label="sticky table">
+                      <TableHead>
+                        <TableRow>
+                          {columns.map((column) => (
                             <TableCell
-                              className={classes.TableCell}
+                              key={column.id}
                               align="center"
+                              className={classes.TableHead}
+                              // style={{ minWidth: column.minWidth }}
                             >
-                              {his.to.length > 1
-                                ? his.to[0] +
-                                  ", " +
-                                  his.to[1].slice(0, 10) +
-                                  "..."
-                                : his.to[0]}
+                              {column.label}
                             </TableCell>
-                            <TableCell
-                              className={classes.TableCell}
-                              align="center"
+                          ))}
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {Array.isArray(fetchedSchedule) ? (
+                          fetchedSchedule.map((his) => (
+                            <TableRow
+                              hover
+                              role="checkbox"
+                              tabIndex={-1}
+                              key={his.nextMailTime}
                             >
-                              {his.subject}
-                            </TableCell>
-                            <TableCell
-                              className={classes.TableCell}
-                              align="center"
-                            >
-                              {his.recurrence}
-                            </TableCell>
-                            <TableCell
-                              className={classes.TableCell}
-                              align="center"
-                            >
-                              {his.nextMailTime}
-                            </TableCell>
-                            <TableCell
-                              className={classes.TableCell}
-                              align="center"
-                            >
-                              {his.task_id !== undefined ? (
-                                <Button
-                                  variant="contained"
-                                  size="large"
-                                  color="primary"
-                                  className="m-10"
-                                  onClick={() => {
-                                    dispatch({
-                                      type: ACTION_TYPES.STOP_SCHEDULE,
-                                      payload: his.task_id,
-                                    });
-                                    dispatch({ type: ACTION_TYPES.GET_SCHEDULE });
-                                  }}
-                                >
-                                  Stop
-                                </Button>
-                              ) : (
-                                <>NON-RECURRENT</>
-                              )}
-                            </TableCell>
-                          </TableRow>
-                        ))
-                      ) : (
-                        <></>
-                      )}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Paper> : 
-              <Alert severity="info" className="max-w-lg mx-auto my-5">
-              <AlertTitle>Info</AlertTitle>
-              <strong>No Emails Scheduled!</strong>
-            </Alert>
-            }
+                              <TableCell
+                                className={classes.TableCell}
+                                align="center"
+                              >
+                                {his.to.length > 1
+                                  ? his.to[0] +
+                                    ", " +
+                                    his.to[1].slice(0, 10) +
+                                    "..."
+                                  : his.to[0]}
+                              </TableCell>
+                              <TableCell
+                                className={classes.TableCell}
+                                align="center"
+                              >
+                                {his.subject}
+                              </TableCell>
+                              <TableCell
+                                className={classes.TableCell}
+                                align="center"
+                              >
+                                {his.recurrence}
+                              </TableCell>
+                              <TableCell
+                                className={classes.TableCell}
+                                align="center"
+                              >
+                                {his.nextMailTime}
+                              </TableCell>
+                              <TableCell
+                                className={classes.TableCell}
+                                align="center"
+                              >
+                                {his.task_id !== undefined ? (
+                                  <Button
+                                    variant="contained"
+                                    size="large"
+                                    color="primary"
+                                    className="m-10"
+                                    onClick={() => {
+                                      dispatch({
+                                        type: ACTION_TYPES.STOP_SCHEDULE,
+                                        payload: his.task_id,
+                                      });
+                                      dispatch({
+                                        type: ACTION_TYPES.GET_SCHEDULE,
+                                      });
+                                    }}
+                                  >
+                                    Stop
+                                  </Button>
+                                ) : (
+                                  <>NON-RECURRENT</>
+                                )}
+                              </TableCell>
+                            </TableRow>
+                          ))
+                        ) : (
+                          <></>
+                        )}
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </Paper>
+              ) : (
+                <Alert severity="info" className="max-w-lg mx-auto my-5">
+                  <AlertTitle>Info</AlertTitle>
+                  <strong>No Emails Scheduled!</strong>
+                </Alert>
+              )}
             </>
           )}
           <Floating />

@@ -32,7 +32,7 @@ export default function History() {
 
   React.useEffect(() => {
     if (fetchedToken === "" || !fetchedToken) router.push("/");
-  })
+  });
 
   const columns = [
     { id: "To", label: "To" },
@@ -41,77 +41,98 @@ export default function History() {
     { id: "Time", label: "Time" },
   ];
   return (
-    <Layout> 
+    <Layout>
       {fetchedError ? (
-            <Alert severity="error" className="max-w-lg mx-auto my-5">
-              <AlertTitle>Error</AlertTitle>
-              <strong>{fetchedError}</strong>
-            </Alert>
-          ) : (
-            <>
-      <h3
-    className="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-centre xl:text-5xl
+        <Alert severity="error" className="max-w-lg mx-auto my-5">
+          <AlertTitle>Error</AlertTitle>
+          <strong>{fetchedError}</strong>
+        </Alert>
+      ) : (
+        <>
+          <h3
+            className="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-centre xl:text-5xl
           xl:text-bold"
-    style={{
-      margin: "15px",
-      color: "#ff3d00",
-      
-    }}
-  >  History
-  </h3>
-  {Array.isArray(fetchedHistory) && fetchedHistory.length>0 ?
-      <Paper className={classes.TableRoot2}>
-        <TableContainer className={classes.TableContainer}>
-          <Table stickyHeader aria-label="sticky table">
-            <TableHead>
-              <TableRow>
-                {columns.map((column) => (
-                  <TableCell
-                    key={column.id}
-                    align="center"
-                    className={classes.TableHead}
-                    // style={{ minWidth: column.minWidth }}
-                  >
-                    {column.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-            {Array.isArray(fetchedHistory) ?
-            (fetchedHistory.map((his) => (
-              
-                <TableRow
-                  hover
-                  role="checkbox"
-                  tabIndex={-1}
-                  key={his.lastSent}
-                >
-                  <TableCell className={classes.TableCell} align="center">
-                  {his.to.length > 1 ? (his.to[0] + ", " + his.to[1].slice(0,10) + "...") : (his.to[0]) }
-                  </TableCell>
-                  <TableCell className={classes.TableCell} align="center">
-                    {his.subject}
-                  </TableCell>
-                  <TableCell className={classes.TableCell} align="center">
-                    {his.recurrence ?  his.recurrence : "Non-recurrent"}
-                  </TableCell>
-                  <TableCell className={classes.TableCell} align="center">
-                    {his.lastSent}
-                  </TableCell>
-                </TableRow>
-              ))):<> </>}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>: 
-      <Alert severity="info" className="max-w-lg mx-auto my-5">
-      <AlertTitle>Info</AlertTitle>
-      <strong>No history yet!</strong>
-    </Alert>
-     }
-      </>
+            style={{
+              margin: "15px",
+              color: "#ff3d00",
+            }}
+          >
+            {" "}
+            History
+          </h3>
+          {Array.isArray(fetchedHistory) && fetchedHistory.length > 0 ? (
+            <Paper className={classes.TableRoot2}>
+              <TableContainer className={classes.TableContainer}>
+                <Table stickyHeader aria-label="sticky table">
+                  <TableHead>
+                    <TableRow>
+                      {columns.map((column) => (
+                        <TableCell
+                          key={column.id}
+                          align="center"
+                          className={classes.TableHead}
+                          // style={{ minWidth: column.minWidth }}
+                        >
+                          {column.label}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {Array.isArray(fetchedHistory) ? (
+                      fetchedHistory.map((his) => (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          tabIndex={-1}
+                          key={his.lastSent}
+                        >
+                          <TableCell
+                            className={classes.TableCell}
+                            align="center"
+                          >
+                            {his.to.length > 1
+                              ? his.to[0] +
+                                ", " +
+                                his.to[1].slice(0, 10) +
+                                "..."
+                              : his.to[0]}
+                          </TableCell>
+                          <TableCell
+                            className={classes.TableCell}
+                            align="center"
+                          >
+                            {his.subject}
+                          </TableCell>
+                          <TableCell
+                            className={classes.TableCell}
+                            align="center"
+                          >
+                            {his.recurrence ? his.recurrence : "Non-recurrent"}
+                          </TableCell>
+                          <TableCell
+                            className={classes.TableCell}
+                            align="center"
+                          >
+                            {his.lastSent}
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    ) : (
+                      <> </>
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Paper>
+          ) : (
+            <Alert severity="info" className="max-w-lg mx-auto my-5">
+              <AlertTitle>Info</AlertTitle>
+              <strong>No history yet!</strong>
+            </Alert>
           )}
+        </>
+      )}
       <Floating />
     </Layout>
   );

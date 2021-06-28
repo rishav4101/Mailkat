@@ -7,9 +7,9 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import Collapse from '@material-ui/core/Collapse';
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import Collapse from "@material-ui/core/Collapse";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
@@ -23,7 +23,6 @@ import { ACTION_TYPES as ac2 } from "../redux/actions/mailAction";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import "suneditor/dist/css/suneditor.min.css"; // Import Sun Editor's CSS File
 import MultiEmail from "../components/MultiEmail";
-
 
 const SunEditor = dynamic(() => import("suneditor-react"), {
   ssr: false,
@@ -46,7 +45,7 @@ export default function Mail() {
 
   const fetchedToken = useSelector((state) => state.auth.token);
 
-  const [msg, setMsg] = React.useState(""); 
+  const [msg, setMsg] = React.useState("");
 
   React.useEffect(() => {
     if (fetchedToken === "" || !fetchedToken) router.push("/");
@@ -114,9 +113,7 @@ export default function Mail() {
     setOnceDate(date);
   };
 
-  const [dailyDate, setDailyDate] = React.useState(
-    new Date()
-  );
+  const [dailyDate, setDailyDate] = React.useState(new Date());
   const handleDailyDateChange = (date) => {
     setDailyDate(date);
   };
@@ -162,8 +159,6 @@ export default function Mail() {
 
   //ALL FORM DATA HANDLER
   const [data, setData] = React.useState({});
-
-  
 
   //ONSEND HANDLER
   const onSend = () => {
@@ -222,9 +217,6 @@ export default function Mail() {
 
     dispatch({ type: ac2.SEND_MAIL, payload: data });
     console.log(mailSentMsg);
-   
-    
-    
   };
 
   const [openSent, setOpenSent] = React.useState(true);
@@ -238,13 +230,14 @@ export default function Mail() {
             className="flex flex-col justify-center rounded-xl p-7"
             style={{ boxShadow: "0px 0px 20px #ffccbc" }}
           >
-            {fetchedCampaignNamesError ? 
-                  <Alert severity="error" className="max-w-lg mx-auto my-5">
-                  <AlertTitle>Error</AlertTitle>
-                  <strong>{fetchedCampaignNamesError}</strong>
-                </Alert> 
-                 :<></>}
-
+            {fetchedCampaignNamesError ? (
+              <Alert severity="error" className="max-w-lg mx-auto my-5">
+                <AlertTitle>Error</AlertTitle>
+                <strong>{fetchedCampaignNamesError}</strong>
+              </Alert>
+            ) : (
+              <></>
+            )}
 
             <h1 className="text-3xl lg:text-5xl my-5">Create a new mail</h1>
             <div className="flex flex-row flex-wrap">
@@ -262,10 +255,15 @@ export default function Mail() {
                     <MenuItem value="">
                       <em>None</em>
                     </MenuItem>
-                    {Array.isArray(fetchedCampaignNames) ?
-                    (fetchedCampaignNames.map((cm) => (
-                      <MenuItem key={cm} value={cm}>{cm}</MenuItem>
-                    ))) : <></>}
+                    {Array.isArray(fetchedCampaignNames) ? (
+                      fetchedCampaignNames.map((cm) => (
+                        <MenuItem key={cm} value={cm}>
+                          {cm}
+                        </MenuItem>
+                      ))
+                    ) : (
+                      <></>
+                    )}
                   </Select>
                 </FormControl>
               </div>
@@ -511,7 +509,7 @@ export default function Mail() {
                 <div className="m-3">
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <KeyboardTimePicker
-                    disablePast={true}
+                      disablePast={true}
                       label="Pick Time"
                       placeholder="08:00 AM"
                       mask="__:__ _M"
@@ -555,7 +553,7 @@ export default function Mail() {
                     </div>
 
                     <KeyboardTimePicker
-                    disablePast={true}
+                      disablePast={true}
                       label="Pick Time"
                       placeholder="08:00 AM"
                       mask="__:__ _M"
@@ -597,7 +595,7 @@ export default function Mail() {
                       </FormControl>
                     </div>
                     <KeyboardTimePicker
-                    disablePast={true}
+                      disablePast={true}
                       label="Pick Time"
                       placeholder="08:00 AM"
                       mask="__:__ _M"
@@ -617,7 +615,7 @@ export default function Mail() {
                 <div className="m-3">
                   <MuiPickersUtilsProvider utils={DateFnsUtils}>
                     <KeyboardDateTimePicker
-                    disablePast={true}
+                      disablePast={true}
                       label="Pick Date Time"
                       onError={console.log}
                       format="yyyy/MM/dd hh:mm a"
@@ -645,45 +643,57 @@ export default function Mail() {
               </Button>
             </div>
             <div>
-            {mailSentError ? 
-            <Collapse in={openSent}>
-                  <Alert action={
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setOpenSent(false);
-              }}
-            >
-              <CloseIcon fontSize="inherit" />
-            </IconButton>
-          } severity="error" className="my-5">
-                  <AlertTitle>Error</AlertTitle>
-                  <strong>{mailSentError}</strong>
-                </Alert> 
+              {mailSentError ? (
+                <Collapse in={openSent}>
+                  <Alert
+                    action={
+                      <IconButton
+                        aria-label="close"
+                        color="inherit"
+                        size="small"
+                        onClick={() => {
+                          setOpenSent(false);
+                        }}
+                      >
+                        <CloseIcon fontSize="inherit" />
+                      </IconButton>
+                    }
+                    severity="error"
+                    className="my-5"
+                  >
+                    <AlertTitle>Error</AlertTitle>
+                    <strong>{mailSentError}</strong>
+                  </Alert>
                 </Collapse>
-                 :<></>}
-                 {mailSentMsg ? 
-                 <Collapse in={openSent}>
-                  <Alert action={
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setOpenSent(false);
-              }}
-            >
-              <CloseIcon fontSize="inherit" />
-            </IconButton>
-          } severity="success" className="my-5">
-                  <AlertTitle>Successful</AlertTitle>
-                  <strong>{mailSentMsg}</strong>
-                </Alert> 
+              ) : (
+                <></>
+              )}
+              {mailSentMsg ? (
+                <Collapse in={openSent}>
+                  <Alert
+                    action={
+                      <IconButton
+                        aria-label="close"
+                        color="inherit"
+                        size="small"
+                        onClick={() => {
+                          setOpenSent(false);
+                        }}
+                      >
+                        <CloseIcon fontSize="inherit" />
+                      </IconButton>
+                    }
+                    severity="success"
+                    className="my-5"
+                  >
+                    <AlertTitle>Successful</AlertTitle>
+                    <strong>{mailSentMsg}</strong>
+                  </Alert>
                 </Collapse>
-                 :<></>}
-                 </div>
+              ) : (
+                <></>
+              )}
+            </div>
           </div>
         </Layout>
       </main>
