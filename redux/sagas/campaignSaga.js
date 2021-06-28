@@ -1,13 +1,16 @@
 import { takeEvery, put, select } from "redux-saga/effects";
 import {
   createCampaignAction,
+  createCampaignActionFailed,
   getCampaignAction,
+  getCampaignActionFailed,
   getCampaignNamesAction,
+  getCampaignNamesActionFailed,
   ACTION_TYPES,
 } from "../actions/campaignAction";
 
 function* createCampaign(action) {
-  console.log("hi");
+  console.log("hi")
   const tkn = yield select((state) => state.auth.token);
   const respData = yield fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/mail/campaign`,
@@ -22,9 +25,19 @@ function* createCampaign(action) {
     }
   );
 
-  const resp = yield respData.json();
-  console.log(resp);
-  yield put(createCampaignAction(resp.message));
+  console.log(respData)
+
+  let resp;
+  if(respData.status === 200){
+    console.log("status 200")
+    resp = yield respData.json();
+    yield put(createCampaignAction(resp.message));
+  } else {
+    resp = yield respData.json();
+    console.log("error in creating campaign");
+    yield put(createCampaignActionFailed(resp.error));
+  }
+
 }
 
 function* getCampaign() {
@@ -40,9 +53,17 @@ function* getCampaign() {
       },
     }
   );
-  const resp = yield respData.json();
-  console.log(resp);
-  yield put(getCampaignAction(resp));
+
+  let resp;
+  if(respData.status === 200){
+    resp = yield respData.json();
+    yield put(getCampaignAction(resp));
+  } else {
+    resp = yield respData.json();
+    console.log("error in getting campaign");
+    yield put(getCampaignActionFailed(resp.error));
+  }
+
 }
 
 function* getCampaignNames() {
@@ -58,9 +79,17 @@ function* getCampaignNames() {
       },
     }
   );
-  const resp = yield respData.json();
-  console.log(resp);
-  yield put(getCampaignNamesAction(resp));
+
+  let resp;
+  if(respData.status === 200){
+    resp = yield respData.json();
+    yield put(getCampaignNamesAction(resp));
+  } else {
+    resp = yield respData.json();
+    console.log("error in getting campaign names");
+    yield put(getCampaignNamesActionFailed(resp.error));
+  }
+
 }
 
 export default function* watchCampaign() {

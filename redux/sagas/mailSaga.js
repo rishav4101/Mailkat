@@ -1,14 +1,17 @@
 import { takeEvery, put, select } from "redux-saga/effects";
 import {
   sendMailAction,
+  sendMailActionFailed,
   getHistoryAction,
+  getHistoryActionFailed,
   getScheduleAction,
+  getScheduleActionFailed,
   stopScheduleAction,
+  stopScheduleActionFailed,
   ACTION_TYPES,
 } from "../actions/mailAction";
 
 function* sendMail(action) {
-  console.log("hi");
   const tkn = yield select((state) => state.auth.token);
   const respData = yield fetch(`${process.env.NEXT_PUBLIC_API_URL}/mail/send`, {
     method: "POST",
@@ -21,9 +24,15 @@ function* sendMail(action) {
     body: JSON.stringify(action.payload),
   });
 
-//   const resp = yield respData.json();
-  console.log(respData);
-  yield put(sendMailAction(respData.status));
+  let resp;
+  if(respData.status === 200){
+    resp = yield respData.json();
+    yield put(sendMailAction(resp.message));
+  } else {
+    resp = yield respData.json();
+    console.log("error in sending mail");
+    yield put(sendMailActionFailed(resp.error));
+  }
 }
 
 function* getHistory() {
@@ -39,9 +48,16 @@ function* getHistory() {
       },
     }
   );
-  const resp = yield respData.json();
-  console.log(resp);
-  yield put(getHistoryAction(resp));
+  let resp;
+  if(respData.status === 200){
+    resp = yield respData.json();
+    yield put(getHistoryAction(resp));
+  } else {
+    resp = yield respData.json();
+    console.log("error in history fetch");
+    yield put(getHistoryActionFailed(resp.error));
+  }
+  
 }
 
 function* getSchedule() {
@@ -57,13 +73,22 @@ function* getSchedule() {
       },
     }
   );
-  const resp = yield respData.json();
-  console.log(resp);
-  yield put(getScheduleAction(resp));
+  let resp;
+  if(respData.status === 200)
+  {
+     resp = yield respData.json();
+     yield put(getScheduleAction(resp));
+  }
+  else{
+    resp = yield respData.json();
+    console.log(resp);
+    console.log("error in schedule fetch");
+    yield put(getScheduleActionFailed(resp.error));
+  }
+  
 }
 
 function* stopSchedule(action) {
-   console.log("hi")
   const tkn = yield select((state) => state.auth.token);
   const respData = yield fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/mail/stopSchedule?taskNumber=${action.payload}`,
@@ -76,9 +101,20 @@ function* stopSchedule(action) {
       },
     }
   );
-  const resp = yield respData.json();
-  console.log(resp);
-  yield put(stopScheduleAction(resp.message));
+
+  let resp;
+  if(respData.status === 200)
+  {
+     resp = yield respData.json();
+     yield put(stopScheduleAction(resp.message));
+  }
+  else{
+    resp = yield respData.json();
+    console.log(resp);
+    console.log("error in schedule fetch");
+    yield put(stopScheduleActionFailed(resp.error));
+  }
+
 }
 
 export default function* watchMail() {

@@ -8,21 +8,24 @@ import GLogin from "../components/GoogleLogin";
 import Link from "next/link";
 import Image from "next/image";
 import pic from "../public/Login.svg";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 export default function Login() {
   const dispatch = useDispatch();
   const router = useRouter();
-  const fetchedLogIn = useSelector((state) => state.auth.logInMsg);
+  const fetchedLogInMsg = useSelector((state) => state.auth.logInMsg);
+  const fetchedLogInError = useSelector((state) => state.auth.logInError);
   const fetchedToken = useSelector((state) => state.auth.token);
-  const [msg, setMsg] = React.useState("");
-   const [data, setData] = React.useState({
+
+  // const [msg, setMsg] = React.useState("");
+  const [data, setData] = React.useState({
     username: "",
     password: "",
   });
 
   const sign = () => {
     dispatch({ type: ACTION_TYPES.LOG_IN, payload: data });
-    setMsg(fetchedLogIn);
+    // setMsg(fetchedLogIn);
     if (fetchedToken !== "" && fetchedToken) router.push("/");
   };
 
@@ -55,7 +58,19 @@ export default function Login() {
                   >
                     Log In
                   </h2>
-                  {msg === undefined ? <h5 className="text-primary mx-auto mt-3 text-center w-full">Error Occured</h5> : <></>}
+
+                  {fetchedLogInError ? 
+                  <Alert severity="error" className="max-w-lg mx-auto my-5">
+              <AlertTitle>Error</AlertTitle>
+              <strong>{fetchedLogInError}</strong>
+            </Alert> : <></>}
+
+            {fetchedLogInMsg ? 
+                  <Alert severity="success" className="max-w-lg mx-auto my-5">
+              <AlertTitle>Successful</AlertTitle>
+              <strong>{fetchedLogInMsg}</strong>
+            </Alert> : <></>}
+
                   <div className="mt-12">
                     <form>
                       <div>
@@ -63,6 +78,7 @@ export default function Login() {
                           Email Address or Username
                         </div>
                         <input
+                        required
                           className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                           type=""
                           placeholder="Enter email or username"
@@ -81,6 +97,7 @@ export default function Login() {
                           </div>
                         </div>
                         <input
+                        required
                           className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                           type="password"
                           placeholder="Enter your password"
