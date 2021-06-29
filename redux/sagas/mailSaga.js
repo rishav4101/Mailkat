@@ -11,6 +11,10 @@ import {
   ACTION_TYPES,
 } from "../actions/mailAction";
 
+import {
+  logOutAction,
+} from "../actions/authAction";
+
 function* sendMail(action) {
   const tkn = yield select((state) => state.auth.token);
   const respData = yield fetch(`${process.env.NEXT_PUBLIC_API_URL}/mail/send`, {
@@ -29,6 +33,9 @@ function* sendMail(action) {
     resp = yield respData.json();
     yield put(sendMailAction(resp.message));
   } else {
+    if(respData.status === 401){
+      yield put(logOutAction());
+    }
     resp = yield respData.json();
     console.log("error in sending mail");
     yield put(sendMailActionFailed(resp.error));
@@ -54,6 +61,9 @@ function* getHistory() {
     console.log(resp);
     yield put(getHistoryAction(resp));
   } else {
+    if(respData.status === 401){
+      yield put(logOutAction());
+    }
     resp = yield respData.json();
     console.log("error in history fetch");
     yield put(getHistoryActionFailed(resp.error));
@@ -82,6 +92,9 @@ function* getSchedule() {
      yield put(getScheduleAction(resp));
   }
   else{
+    if(respData.status === 401){
+      yield put(logOutAction());
+    }
     resp = yield respData.json();
     console.log(resp);
     console.log("error in schedule fetch");
@@ -111,6 +124,9 @@ function* stopSchedule(action) {
      yield put(stopScheduleAction(resp.message));
   }
   else{
+    if(respData.status === 401){
+      yield put(logOutAction());
+    }
     resp = yield respData.json();
     console.log(resp);
     console.log("error in schedule fetch");

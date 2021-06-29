@@ -100,7 +100,7 @@ export default function Createcampaign() {
                 </div>
               </div>
               <div className="lg:w-1/2 xl:max-w-screen-sm">
-                <div className="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl">
+                <div className=" px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-10 xl:px-24 xl:max-w-2xl">
                   <h2
                     className="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-centre xl:text-5xl
 xl:text-bold"
@@ -189,6 +189,7 @@ xl:text-bold"
                           </Button>
                         </div>
                       </div>
+                      <div className="h-16 w-full md:h-1"></div>
                     </form>
                   </div>
                 </div>

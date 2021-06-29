@@ -89,7 +89,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="w-full rounded-sm p-5 lg:p-10 flex flex-row flex-wrap justify-between items-center bg-fadedOrange rounded-xl">
+          <div className="w-11/12 mx-auto rounded-sm p-5 lg:p-10 flex flex-row flex-wrap justify-between items-center bg-fadedOrange rounded-xl">
             <div className="flex flex-col justify-center items-center text-center sm:items-start sm:text-left mx-auto lg:mx-0">
               <h1 className="text-2xl lg:text-4xl ">
                 Start now by creating a new campaign.

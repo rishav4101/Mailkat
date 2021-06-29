@@ -36,7 +36,7 @@ export default function MailDrawer(props){
         </div>
 
         <div className="w-full mx-5 text-left">
-          <div className="text-md">{date.toLocaleDateString() + " " + date.toLocaleTimeString()}</div>
+          <div className="text-md">{date.toString()}</div>
         <div className="h-px w-4/5 my-2 bg-fadedOrange"></div>
         <div className="flex flex-row">
             <h1 className="text-lg font-semibold text-primary w-4/12 sm:w-3/12">Recurrence : </h1> 

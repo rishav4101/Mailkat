@@ -11,6 +11,10 @@ import {
   ACTION_TYPES,
 } from "../actions/campaignAction";
 
+import {
+  logOutAction,
+} from "../actions/authAction";
+
 function* createCampaign(action) {
   const tkn = yield select((state) => state.auth.token);
   const respData = yield fetch(
@@ -34,6 +38,9 @@ function* createCampaign(action) {
     resp = yield respData.json();
     yield put(createCampaignAction(resp.message));
   } else {
+    if(respData.status === 401){
+      yield put(logOutAction());
+    }
     resp = yield respData.json();
     console.log("error in creating campaign");
     yield put(createCampaignActionFailed(resp.error));
@@ -64,6 +71,9 @@ function* updateCampaign(action) {
     resp = yield respData.json();
     yield put(updateCampaignAction(resp.message));
   } else {
+    if(respData.status === 401){
+      yield put(logOutAction());
+    }
     resp = yield respData.json();
     console.log("error in updating campaign");
     yield put(updateCampaignActionFailed(resp.error));
@@ -90,6 +100,9 @@ function* getCampaign() {
     resp = yield respData.json();
     yield put(getCampaignAction(resp));
   } else {
+    if(respData.status === 401){
+      yield put(logOutAction());
+    }
     resp = yield respData.json();
     console.log("error in getting campaign");
     yield put(getCampaignActionFailed(resp.error));
@@ -116,6 +129,9 @@ function* getCampaignNames() {
     resp = yield respData.json();
     yield put(getCampaignNamesAction(resp));
   } else {
+    if(respData.status === 401){
+      yield put(logOutAction());
+    }
     resp = yield respData.json();
     console.log("error in getting campaign names");
     yield put(getCampaignNamesActionFailed(resp.error));

@@ -10,7 +10,7 @@ export const useTableStyles = makeStyles({
     color: "#dd2c00 !important",
   },
   TableRoot2: {
-    width: "100%",
+    width: "95%",
     maxWidth: 1300,
     minWidth:300,
     margin: "30px auto",

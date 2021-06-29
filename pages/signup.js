@@ -57,7 +57,7 @@ export default function Signup() {
           >
             <div className="lg:flex">
               <div className="lg:w-1/2 xl:max-w-screen-sm">
-                <div className="mt-10 px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-16 xl:px-24 xl:max-w-2xl">
+                <div className="px-12 sm:px-24 md:px-48 lg:px-12 lg:mt-10 xl:px-24 xl:max-w-2xl">
                   <h2
                     className="text-center text-4xl text-indigo-900 font-display font-semibold lg:text-centre xl:text-6xl
                   xl:text-bold"
@@ -178,21 +178,20 @@ export default function Signup() {
                     </div>
                     {/* Google signup  */}
                     <GLogin text="Login with google" />
-                    <div className="mt-4 text-sm font-display font-semibold text-gray-700 text-center">
-                      Already have an account ?{" "}
+                    <div className="flex justify-center mt-4 text-sm font-display font-semibold text-gray-700 text-center">
+                      Have an account ? &nbsp;
                       <Link
-                        className="cursor-pointer text-indigo-600 hover:text-indigo-800"
-                        style={{ color: "red", fontWeight: "bold" }}
                         href="./login"
                       >
-                        Log In
+                       <h1 className="cursor-pointer text-primary w-15">Log In</h1> 
                       </Link>
                     </div>
+                    <div className="h-16 w-full md:h-1"></div>
                   </div>
                 </div>
               </div>
               <div
-                className="hidden lg:flex items-center justify-center bg-indigo-100 flex-1 h-screen"
+                className="hidden lg:flex items-center justify-center flex-1 h-screen"
                 style={{ height: "auto" }}
               >
                 <div className="max-w-xs transform duration-200 hover:scale-110 cursor-pointer">

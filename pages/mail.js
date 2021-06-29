@@ -227,7 +227,7 @@ export default function Mail() {
       <main>
         <Layout>
           <div
-            className="flex flex-col justify-center rounded-xl p-7"
+            className="rounded-xl p-4 sm:p-7 w-11/12 mx-auto"
             style={{ boxShadow: "0px 0px 20px #ffccbc" }}
           >
             {fetchedCampaignNamesError ? (
@@ -695,6 +695,7 @@ export default function Mail() {
               )}
             </div>
           </div>
+          <div className="h-7"></div>
         </Layout>
       </main>
     </div>
