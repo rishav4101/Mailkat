@@ -51,6 +51,7 @@ function* getHistory() {
   let resp;
   if(respData.status === 200){
     resp = yield respData.json();
+    console.log(resp);
     yield put(getHistoryAction(resp));
   } else {
     resp = yield respData.json();
@@ -77,6 +78,7 @@ function* getSchedule() {
   if(respData.status === 200)
   {
      resp = yield respData.json();
+     console.log(resp);
      yield put(getScheduleAction(resp));
   }
   else{

@@ -21,7 +21,7 @@ export default function Floating() {
     <div
       className={classes.root}
       style={{
-        zIndex: "999",
+        zIndex: 999999,
         position: "fixed",
         bottom: "15px",
         right: "15px",

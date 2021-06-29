@@ -19,6 +19,7 @@ import Image from "next/image";
 import pic from "../public/Graphic2.svg";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { useRouter } from "next/router";
+import MailDrawer from "../components/mailDrawer";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -31,6 +32,17 @@ export default function Home() {
     dispatch({ type: ACTION_TYPES.GET_SCHEDULE });
     console.log(fetchedSchedule);
   }, []);
+
+  const [open, setOpen] = React.useState(false);
+  const [mailData, setMailData] = React.useState({});
+  const handleDrawerOpen = (dat) => {
+    setMailData(dat)
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
   const columns = [
     { id: "To", label: "To" },
@@ -51,6 +63,7 @@ export default function Home() {
 
       <main>
         <Layout>
+        <MailDrawer open={open} handleDrawerClose={handleDrawerClose} data={mailData}/>
           <div className="flex flex-row flex-wrap-reverse my-10">
             <div className="flex flex-col justify-center items-center text-center xl:items-start xl:text-left mx-auto max-w-xl">
               <h1 className="text-4xl lg:text-6xl xl:text-7xl ">
@@ -146,6 +159,9 @@ export default function Home() {
                               role="checkbox"
                               tabIndex={-1}
                               key={his.nextMailTime}
+                              onClick={() => 
+                                handleDrawerOpen(his)
+                              }
                             >
                               <TableCell
                                 className={classes.TableCell}

@@ -13,6 +13,7 @@ import { ACTION_TYPES } from "../redux/actions/mailAction";
 import Floating from "../components/Floating";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import { useRouter } from "next/router";
+import MailDrawer from "../components/mailDrawer";
 
 export default function History() {
   const dispatch = useDispatch();
@@ -34,6 +35,17 @@ export default function History() {
     if (fetchedToken === "" || !fetchedToken) router.push("/");
   });
 
+  const [open, setOpen] = React.useState(false);
+  const [mailData, setMailData] = React.useState({});
+  const handleDrawerOpen = (dat) => {
+    setMailData(dat)
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
   const columns = [
     { id: "To", label: "To" },
     { id: "Subject", label: "Subject" },
@@ -42,6 +54,7 @@ export default function History() {
   ];
   return (
     <Layout>
+      <MailDrawer open={open} handleDrawerClose={handleDrawerClose} data={mailData}/>
       {fetchedError ? (
         <Alert severity="error" className="max-w-lg mx-auto my-5">
           <AlertTitle>Error</AlertTitle>
@@ -86,6 +99,9 @@ export default function History() {
                           role="checkbox"
                           tabIndex={-1}
                           key={his.lastSent}
+                          onClick={() => 
+                            handleDrawerOpen(his)
+                          }
                         >
                           <TableCell
                             className={classes.TableCell}

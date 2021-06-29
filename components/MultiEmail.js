@@ -1,4 +1,3 @@
-import { PermPhoneMsgRounded } from "@material-ui/icons";
 import React from "react";
 import { ReactMultiEmail, isEmail } from "react-multi-email";
 import "react-multi-email/style.css";
