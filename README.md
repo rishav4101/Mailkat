@@ -31,14 +31,14 @@ MailKat is a MERN-based full-stack web app where users can register and login to
 MailKat has options for custom as well as google sign-in methods. User can create mails, edit them and schedule the mails as well as send recurring mails.
 It also has option to create Campaigns with multiple recipients and reuse the campaigns to send emails to same audience.
 The scheduling can be done in different ways like-
-| Schedule         	| Action                              	|
-|------------------	|--------------------------------------	|
-| Once             	| Gets the email sent once             	|
-| Timely Schedule  	| Sends after a set number of seconds  	|
-| Daily Schedule   	| Sends daily at a set time            	|
-| Weekly Schedule  	| Sends weekly at a set time           	|
-| Monthly Schedule 	| Sends monthly at a set date and time 	|
-| Yearly Schedule  	| Sends yearly at a set date and time  	|
+| Schedule         	| Action                              	    |
+|------------------	|-------------------------------------------|
+| Once             	| Sends the email once                    	|
+| Timely Schedule  	| Keeps sending at a set number of seconds  |
+| Daily Schedule   	| Sends daily at a set time            	    |
+| Weekly Schedule  	| Sends weekly at a set time           	    |
+| Monthly Schedule 	| Sends monthly at a set date and time 	    |
+| Yearly Schedule  	| Sends yearly at a set date and time  	    |
 <br/>
  
  # Features
