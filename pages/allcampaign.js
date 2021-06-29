@@ -170,6 +170,7 @@ export default function Allcampaign() {
         </>
       )}
       <Floating />
+      <div className="h-20 w-full"></div>
     </Layout>
   );
 }

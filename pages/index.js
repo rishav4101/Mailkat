@@ -246,6 +246,7 @@ export default function Home() {
             </>
           )}
           <Floating />
+          <div className="h-20 w-full"></div>
         </Layout>
       </main>
     </div>
