@@ -170,6 +170,7 @@ export default function Home() {
             </TableContainer>
           </Paper>
           <Floating />
+          <div className="h-20 w-full"></div>
         </Layout>
       </main>
     </div>
