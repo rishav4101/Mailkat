@@ -1,9 +1,12 @@
 import { takeEvery, put } from "redux-saga/effects";
 import {
   signUpAction,
+  signUpActionFailed,
   logInAction,
-  logOutAction,
+  logInActionFailed,
   gLogInAction,
+  gLogInActionFailed,
+  logOutAction,
   ACTION_TYPES,
 } from "../actions/authAction";
 
@@ -19,9 +22,16 @@ function* signUp(action) {
     }
   );
 
-  const resp = yield respData.json();
-  console.log(resp);
-  yield put(signUpAction(resp));
+  let resp;
+  if(respData.status === 200){
+    resp = yield respData.json();
+    yield put(signUpAction(resp));
+  } else {
+    resp = yield respData.json();
+    console.log("error in sign up");
+    yield put(signUpActionFailed(resp));
+  }
+  
 }
 
 function* logIn(action) {
@@ -35,11 +45,17 @@ function* logIn(action) {
       body: JSON.stringify(action.payload),
     }
   );
-  const resp = yield respData.json();
-  console.log(resp);
-  if(!resp.token)
-    resp.token = "";
-  yield put(logInAction(resp));
+
+  let resp;
+  if(respData.status === 200){
+    resp = yield respData.json();
+    yield put(logInAction(resp));
+  } else {
+    resp = yield respData.json();
+    console.log("error in sign up");
+    yield put(logInActionFailed(resp));
+  }
+
 }
 
 function* gLogIn(action) {
@@ -53,11 +69,17 @@ function* gLogIn(action) {
         body: JSON.stringify(action.payload),
       }
     );
-    const resp = yield respData.json();
-    console.log(resp);
-    if(!resp.token)
-      resp.token = "";
-    yield put(gLogInAction(resp));
+
+    let resp;
+    if(respData.status === 200){
+      resp = yield respData.json();
+      yield put(gLogInAction(resp));
+    } else {
+      resp = yield respData.json();
+      console.log("error in sign up");
+      yield put(gLogInActionFailed(resp));
+    }
+    
   }
 
 function* logOut() {

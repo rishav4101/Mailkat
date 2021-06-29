@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { min } from "date-fns";
 
 export const useTableStyles = makeStyles({
   TableHead: {
@@ -92,5 +93,33 @@ export const useNavbarStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     marginLeft: 0,
+  },
+}));
+
+
+export const useMailDrawerStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+  },
+  drawer: {
+    width: "min(100%, 600px)",
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: "min(100%, 600px)",
+    color: "#000",
+    borderLeft: "8px solid #ff3d00",
+    // boxShadow:"0px 0px 20px #ffccbc",
+    borderTopLeftRadius:20,
+    borderBottomLeftRadius:20,
+  },
+  drawerHeader: {
+    display: "flex",
+    alignItems: "center",
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: "flex-end",
+    minHeight:"80px !important"
   },
 }));

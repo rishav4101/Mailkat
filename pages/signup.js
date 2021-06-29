@@ -8,25 +8,34 @@ import GLogin from "../components/GoogleLogin";
 import Image from "next/image";
 import pic from "../public/signup.svg";
 import Link from "next/link";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 export default function Signup() {
   const dispatch = useDispatch();
   const router = useRouter();
-  const fetchedSignUp = useSelector((state) => state.auth.signUpMsg);
+  const fetchedSignUpMsg = useSelector((state) => state.auth.signUpMsg);
+  const fetchedSignUpError = useSelector((state) => state.auth.signUpError);
   const fetchedToken = useSelector((state) => state.auth.token);
-  const [msg, setMsg] = React.useState("");
+  // const [msg, setMsg] = React.useState("");
 
   const [data, setData] = React.useState({
     email: "",
     username: "",
     password: "",
-    name:""
+    name: "",
   });
 
   const sign = () => {
+    console.log(data);
     dispatch({ type: ACTION_TYPES.SIGN_UP, payload: data });
-    setMsg(fetchedSignUp);
-    console.log(fetchedSignUp);
+    // setMsg(fetchedSignUpMsg);
+    setData({
+      email: "",
+      username: "",
+      password: "",
+      name: "",
+    });
+    console.log(fetchedSignUpMsg);
     if (fetchedToken !== "" && fetchedToken) router.push("/");
   };
 
@@ -59,28 +68,46 @@ export default function Signup() {
                   >
                     Sign Up
                   </h2>
-                  {msg === undefined ? <h5 className="text-primary mx-auto mt-3 text-center w-full">Error Occured</h5> : <></>}
+                  {fetchedSignUpError ? (
+                    <Alert severity="error" className="max-w-lg mx-auto my-5">
+                      <AlertTitle>Error</AlertTitle>
+                      <strong>{fetchedSignUpError}</strong>
+                    </Alert>
+                  ) : (
+                    <></>
+                  )}
+
+                  {fetchedSignUpMsg ? (
+                    <Alert severity="success" className="max-w-lg mx-auto my-5">
+                      <AlertTitle>Successful</AlertTitle>
+                      <strong>{fetchedSignUpMsg}</strong>
+                    </Alert>
+                  ) : (
+                    <></>
+                  )}
+
                   <div className="mt-12">
                     <form>
-                      
-                        <div className="mt-4 text-sm font-bold text-gray-700 tracking-wide">
-                          Name
-                        </div>
-                        <input
-                          className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
-                          type=""
-                          placeholder="Enter your name"
-                          value={data.name}
-                          onChange={(e) => {
-                            setData({ ...data, name: e.target.value });
-                            console.log(data);
-                          }}
-                        ></input>
-                        <div>
+                      <div className="mt-4 text-sm font-bold text-gray-700 tracking-wide">
+                        Name
+                      </div>
+                      <input
+                        required
+                        className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
+                        type=""
+                        placeholder="Enter your name"
+                        value={data.name}
+                        onChange={(e) => {
+                          setData({ ...data, name: e.target.value });
+                          console.log(data);
+                        }}
+                      ></input>
+                      <div>
                         <div className="mt-4 text-sm font-bold text-gray-700 tracking-wide">
                           Email Address
                         </div>
                         <input
+                          required
                           className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                           type=""
                           placeholder="Enter your email address"
@@ -98,6 +125,7 @@ export default function Signup() {
                           </div>
                         </div>
                         <input
+                          required
                           className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                           type=""
                           placeholder="Enter your username"
@@ -115,6 +143,7 @@ export default function Signup() {
                           </div>
                         </div>
                         <input
+                          required
                           className="w-full text-lg py-2 border-b border-gray-300 focus:outline-none focus:border-indigo-500"
                           type="password"
                           placeholder="Enter your password"

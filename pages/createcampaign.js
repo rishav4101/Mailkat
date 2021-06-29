@@ -4,20 +4,28 @@ import Button from "@material-ui/core/Button";
 import MultiEmail from "../components/MultiEmail";
 import TextField from "@material-ui/core/TextField";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
 import { ACTION_TYPES } from "../redux/actions/campaignAction";
 import Floating from "../components/Floating";
 import Image from "next/image";
 import pic from "../public/Login.svg";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 export default function Createcampaign() {
   const dispatch = useDispatch();
-  const createdCampaign = useSelector(
+  const router = useRouter();
+  const createdCampaignMsg = useSelector(
     (state) => state.campaign.createCampaignMsg
+  );
+  const createdCampaignError = useSelector(
+    (state) => state.campaign.createCampaignError
   );
 
   const fetchedToken = useSelector((state) => state.auth.token);
 
-
+  React.useEffect(() => {
+    if (fetchedToken === "" || !fetchedToken) router.push("/");
+  });
 
   // const [toEmails, setToEmails] = React.useState([]);
   //EMAILS
@@ -53,7 +61,7 @@ export default function Createcampaign() {
 
     console.log(data);
     dispatch({ type: ACTION_TYPES.CREATE_CAMPAIGN, payload: data });
-    console.log(createdCampaign);
+    console.log(createdCampaignMsg);
 
     setToEmails([]);
     setCcEmails([]);
@@ -103,6 +111,25 @@ xl:text-bold"
                   >
                     Create Campaign
                   </h2>
+
+                  {createdCampaignError ? (
+                    <Alert severity="error" className="max-w-lg mx-auto my-5">
+                      <AlertTitle>Error</AlertTitle>
+                      <strong>{createdCampaignError}</strong>
+                    </Alert>
+                  ) : (
+                    <></>
+                  )}
+
+                  {createdCampaignMsg ? (
+                    <Alert severity="success" className="max-w-lg mx-auto my-5">
+                      <AlertTitle>Successful</AlertTitle>
+                      <strong>{createdCampaignMsg}</strong>
+                    </Alert>
+                  ) : (
+                    <></>
+                  )}
+
                   <div className="mt-12">
                     <form>
                       <div>
@@ -110,6 +137,7 @@ xl:text-bold"
                           Campaign Name
                         </div>
                         <TextField
+                          required
                           className="w-full"
                           id="outlined-basic"
                           placeholder="Enter Campaign Name"
@@ -125,6 +153,7 @@ xl:text-bold"
                           </div>
                         </div>
                         <MultiEmail
+                          required
                           email={toEmails}
                           handler={changeToEmails}
                           placeholder="To"
