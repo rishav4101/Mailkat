@@ -4,6 +4,9 @@ const initialState = {
     createCampaignMsg: undefined,
     createCampaignError: undefined,
 
+    updateCampaignMsg: undefined,
+    updateCampaignError: undefined,
+
     campaigns: [],
     campaignsError: undefined,
     
@@ -33,6 +36,13 @@ export default (state = initialState, action) => {
         case ACTION_TYPES.GET_CAMPAIGN_NAMES_FAILED:
             console.log(action)
             return {...state, campaignNamesError:action.payload};
+
+        case ACTION_TYPES.CAMPAIGN_UPDATED:
+            console.log(action.payload)
+            return {...state, updateCampaignMsg:action.payload, updateCampaignError:undefined};
+        case ACTION_TYPES.UPDATE_CAMPAIGN_FAILED:
+            console.log(action.payload)
+            return {...state, updateCampaignError:action.payload};
 
         default:
             return state;

@@ -159,13 +159,14 @@ export default function Home() {
                               role="checkbox"
                               tabIndex={-1}
                               key={his.nextMailTime}
-                              onClick={() => 
-                                handleDrawerOpen(his)
-                              }
+                              
                             >
                               <TableCell
                                 className={classes.TableCell}
                                 align="center"
+                                onClick={() => 
+                                  handleDrawerOpen(his)
+                                }
                               >
                                 {his.to.length > 1
                                   ? his.to[0] +
@@ -177,18 +178,27 @@ export default function Home() {
                               <TableCell
                                 className={classes.TableCell}
                                 align="center"
+                                onClick={() => 
+                                  handleDrawerOpen(his)
+                                }
                               >
                                 {his.subject}
                               </TableCell>
                               <TableCell
                                 className={classes.TableCell}
                                 align="center"
+                                onClick={() => 
+                                  handleDrawerOpen(his)
+                                }
                               >
                                 {his.recurrence}
                               </TableCell>
                               <TableCell
                                 className={classes.TableCell}
                                 align="center"
+                                onClick={() => 
+                                  handleDrawerOpen(his)
+                                }
                               >
                                 {his.nextMailTime}
                               </TableCell>

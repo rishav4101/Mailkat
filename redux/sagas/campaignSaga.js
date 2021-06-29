@@ -6,11 +6,12 @@ import {
   getCampaignActionFailed,
   getCampaignNamesAction,
   getCampaignNamesActionFailed,
+  updateCampaignAction,
+  updateCampaignActionFailed,
   ACTION_TYPES,
 } from "../actions/campaignAction";
 
 function* createCampaign(action) {
-  console.log("hi")
   const tkn = yield select((state) => state.auth.token);
   const respData = yield fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/mail/campaign`,
@@ -36,6 +37,36 @@ function* createCampaign(action) {
     resp = yield respData.json();
     console.log("error in creating campaign");
     yield put(createCampaignActionFailed(resp.error));
+  }
+
+}
+
+function* updateCampaign(action) {
+  const tkn = yield select((state) => state.auth.token);
+  const respData = yield fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/mail/updateCampaign`,
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${tkn}`,
+      },
+      body: JSON.stringify(action.payload),
+    }
+  );
+
+  console.log(respData)
+
+  let resp;
+  if(respData.status === 200){
+    console.log("status 200")
+    resp = yield respData.json();
+    yield put(updateCampaignAction(resp.message));
+  } else {
+    resp = yield respData.json();
+    console.log("error in updating campaign");
+    yield put(updateCampaignActionFailed(resp.error));
   }
 
 }
@@ -94,6 +125,7 @@ function* getCampaignNames() {
 
 export default function* watchCampaign() {
   yield takeEvery(ACTION_TYPES.CREATE_CAMPAIGN, createCampaign);
+  yield takeEvery(ACTION_TYPES.UPDATE_CAMPAIGN, updateCampaign);
   yield takeEvery(ACTION_TYPES.GET_CAMPAIGN, getCampaign);
   yield takeEvery(ACTION_TYPES.GET_CAMPAIGN_NAMES, getCampaignNames);
 }

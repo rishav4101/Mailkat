@@ -10,6 +10,10 @@ export const ACTION_TYPES = {
     GET_CAMPAIGN_NAMES:"GET_CAMPAIGN_NAMES",
     RECIEVED_CAMPAIGN_NAMES: "RECIEVED_CAMPAIGN_NAMES",
     GET_CAMPAIGN_NAMES_FAILED:"GET_CAMPAIGN_NAMES_FAILED",
+
+    UPDATE_CAMPAIGN: "UPDATE_CAMPAIGN",
+    CAMPAIGN_UPDATED: "CAMPAIGN_UPDATED",
+    UPDATE_CAMPAIGN_FAILED: "UPDATE_CAMPAIGN_FAILED",
   };
   
   export const createCampaignAction = (rsp) => ({
@@ -39,6 +43,15 @@ export const ACTION_TYPES = {
     payload: rsp,
   });
 
+  export const updateCampaignAction = (rsp) => ({
+    type: ACTION_TYPES.CAMPAIGN_UPDATED,
+    payload: rsp,
+  });
+  export const updateCampaignActionFailed = (rsp) => ({
+    type: ACTION_TYPES.UPDATE_CAMPAIGN_FAILED,
+    payload: rsp,
+  });
+
   export default {
     createCampaignAction,
     createCampaignActionFailed,
@@ -46,5 +59,7 @@ export const ACTION_TYPES = {
     getCampaignActionFailed,
     getCampaignNamesAction,
     getCampaignNamesActionFailed,
+    updateCampaignAction,
+    updateCampaignActionFailed
   };
   

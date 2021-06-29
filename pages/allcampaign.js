@@ -13,12 +13,16 @@ import { ACTION_TYPES } from "../redux/actions/campaignAction";
 import { useRouter } from "next/router";
 import Floating from "../components/Floating";
 import { Alert, AlertTitle } from "@material-ui/lab";
+import CampaignDrawer from "../components/campaignDrawer";
 
 export default function Allcampaign() {
   const dispatch = useDispatch();
   const router = useRouter();
   const getCampaign = useSelector((state) => state.campaign.campaigns);
   const fetchedError = useSelector((state) => state.mail.campaignsError);
+
+  // const updateCampaign = useSelector((state) => state.campaign.campaigns);
+  // const updateCampaignError = useSelector((state) => state.mail.campaignsError);
 
   React.useEffect(() => {
     dispatch({
@@ -39,8 +43,50 @@ export default function Allcampaign() {
     { id: "mdate", label: "Emails", minWidth: 170 },
   ];
 
+  // const [ems, setEms] = React.useState({});
+  const [open, setOpen] = React.useState(false);
+  const [edit, setEdit] = React.useState(false);
+  const handleEdit= () => {
+    setEdit(true);
+  };
+  const [campaignData, setCampaignData] = React.useState({});
+
+
+  const changeToEmails = (emails) => {
+    setCampaignData({...campaignData, to : emails});
+  };
+
+  const changeCcEmails = (emails) => {
+    setCampaignData({...campaignData, cc : emails});
+  };
+
+  const changeBccEmails = (emails) => {
+    setCampaignData({...campaignData, bcc : emails});
+  };
+
+
+  const handleDrawerOpen = (dat) => {
+    setEdit(false);
+    setCampaignData(dat)
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
+  const handleOnSend = () => {
+    console.log(campaignData);
+    dispatch({type:ACTION_TYPES.UPDATE_CAMPAIGN, payload: campaignData})
+    dispatch({
+      type: ACTION_TYPES.GET_CAMPAIGN,
+    });
+    setOpen(false);
+  }
+
   return (
     <Layout>
+      <CampaignDrawer open={open} edit={edit} handleOnSend={handleOnSend} handleEdit={handleEdit} handleDrawerClose={handleDrawerClose} data={campaignData} changeToEmails={changeToEmails} changeCcEmails={changeCcEmails} changeBccEmails={changeBccEmails} />
       {fetchedError ? (
         <Alert severity="error" className="max-w-lg mx-auto my-5">
           <AlertTitle>Error</AlertTitle>
@@ -82,7 +128,10 @@ export default function Allcampaign() {
                     {Array.isArray(getCampaign) ? (
                       getCampaign.map((cam) => (
                         <>
-                          <TableRow hover role="checkbox" tabIndex={-1}>
+                          <TableRow hover role="checkbox" tabIndex={-1} 
+                          onClick={() => 
+                            handleDrawerOpen(cam)
+                          }>
                             <TableCell
                               className={classes.TableCell}
                               style={{ width: "50%", fontWeight: "bold" }}
